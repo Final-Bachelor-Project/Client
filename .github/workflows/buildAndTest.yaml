@@ -1,0 +1,18 @@
+name: buildAndTest
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - name: Installing project dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm run test
+      - name: Run lint
+        run: npm run lint
+      - name: Building the project
+        run: npm run build
