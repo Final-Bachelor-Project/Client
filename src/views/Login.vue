@@ -6,11 +6,12 @@
       alt="Spotify logo"
     >
     <h1 class="pt-4">
-      {{ name }}
+      TuneBuddy
     </h1>
     <b-button
+      variant="spotify-green"
       class="mt-4 spotify-login-btn"
-      @click="loginWithSpotify"
+      href="/api/login"
     >
       <img
         class="spotify-logo"
@@ -19,24 +20,17 @@
       >
       Login with Spotify
     </b-button>
-    <a href="/api/login">Login</a>
   </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            name: "Our app"
+            
         }
     },
     methods: {
-        loginWithSpotify: async function () {
-            fetch("/api/login").then(() => {
-                console.log('success');
-            }).catch(er => {
-                console.log(er);
-            })
-        }
+        
     }
 }
 </script>
@@ -46,13 +40,15 @@ export default {
 }
 
 .spotify-login-btn {
-    background-color: var(--spotify-green);
+    font-weight: bold;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
 }
 
 .spotify-logo {
     height: 2rem;
     width: 2rem;
-    margin-right: 0.5rem;
+    margin-right: 0.2rem;
 }
 
 </style>
