@@ -19,6 +19,7 @@
       >
       Login with Spotify
     </b-button>
+    <a href="/api/login">Login</a>
   </div>
 </template>
 <script>
@@ -30,8 +31,11 @@ export default {
     },
     methods: {
         loginWithSpotify: async function () {
-            console.log('here');
-            await this.$axios.get("/login")
+            fetch("/api/login").then(() => {
+                console.log('success');
+            }).catch(er => {
+                console.log(er);
+            })
         }
     }
 }
