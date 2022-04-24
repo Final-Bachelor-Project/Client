@@ -31,7 +31,7 @@ export default {
     methods: {
         loginWithSpotify: async function () {
             console.log('here');
-            await this.$http.get("http://localhost:3080/login")
+            await this.$axios.get("/login")
         }
     }
 }
