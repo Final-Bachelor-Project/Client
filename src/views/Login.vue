@@ -6,9 +6,7 @@
       alt="Logo"
     >
     <div class="mb-5">
-      <p
-        id="app-text"
-      >
+      <p id="app-text">
         Connect with people that share your taste in music
       </p>
       <b-button
