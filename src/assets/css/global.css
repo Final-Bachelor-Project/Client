@@ -1,3 +1,9 @@
 :root {
-    background: yellow;
+    --spotify-green: #1DB954;
+    --white: #FFFFFF
+}
+
+.btn-spotify-green {
+    background-color: var(--spotify-green) !important;
+    color: var(--white) !important;
 }
