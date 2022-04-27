@@ -109,7 +109,6 @@ export default {
     methods: {
         completeProfile: async function (e) {
             e.preventDefault()
-            console.log(this.user);
             await this.$axios.post("api/users", {...this.user})
         },
         editImage: function() {
