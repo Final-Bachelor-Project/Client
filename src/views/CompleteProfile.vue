@@ -27,40 +27,62 @@
       class="profile-form"
       @submit="completeProfile"
     >
-      <b-form-input
-        v-model="user.firstName"
-        placeholder="First Name"
-      />
-      <b-form-input
-        v-model="user.lastName"
-        placeholder="Last Name"
-      />
-      <b-form-input
+      <div class="flex-container">
+        <b-form-input
+          v-model="user.firstName"
+          required
+          placeholder="First Name"
+        />
+        <b-form-input
+          v-model="user.lastName"
+          required
+          placeholder="Last Name"
+        />
+      </div>
+      <!-- <b-form-input
         v-model="user.dateOfBirth"
+        required
         type="date"
         placeholder="Date of birth"
-      />
-      <b-form-input
-        v-model="user.city"
-        placeholder="City"
-      />
-      <b-form-input
-        v-model="user.country"
-        placeholder="Country"
-      />
-      <b-form-textarea
-        v-model="user.bio"
-        placeholder="Tell us something about yourself..."
-        rows="3"
-        max-rows="5"
-      />
-      <b-button
-        class="large-btn-mobile"
-        type="submit"
-        variant="primary"
+      /> -->
+      <b-form-group
+        label="Date of birth"
+        label-for="date-of-birth-input"
       >
-        Complete
-      </b-button>
+        <b-form-input
+          id="date-of-birth-input"
+          v-model="user.dateOfBirth"
+          required
+          type="date"
+        />
+        <div class="flex-container">
+          <b-form-input
+            v-model="user.city"
+            required
+            placeholder="City"
+          />
+          <b-form-input
+            v-model="user.country"
+            required
+            placeholder="Country"
+          />
+        </div>
+        <b-form-textarea 
+          v-model="user.bio"
+          placeholder="Tell us something about yourself..."
+          rows="3"
+          max-rows="5"
+        />
+        <div class="text-center mt-4">
+          <b-button
+            class="large-btn-mobile"
+            type="submit"
+            variant="primary"
+          >
+            Complete
+          </b-button>
+        </div>
+      </b-form-group>
     </b-form>
   </div>
 </template>
@@ -123,20 +145,54 @@ header {
 
 .profile-form {
     margin: 1.5rem;
-    position: relative;
+    /* position: relative; */
+    /* text-align: center; */
 }
 
 .profile-form input {
     margin-bottom: 1rem;
 }
 
-.profile-form button {
+/* .profile-form button {
     position: absolute; 
     bottom: 0.7rem;
     left: 0; 
     right: 0; 
     margin-left: auto; 
     margin-right: auto; 
+} */
+
+@media only screen and (min-width: 768px) {
+    .flex-container{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .flex-container input:first-child {
+        margin-right: 0.5rem;
+    }
+
+    .flex-container input:last-child {
+        margin-left: 0.5rem;
+    }
+
+    .profile-form {
+        margin-right: 3rem;
+        margin-left: 3rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .profile-form {
+        margin-right: 8rem;
+        margin-left: 8rem;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .profile-form {
+        margin-right: 15rem;
+        margin-left: 15rem;
+    }
 }
 
 </style>
