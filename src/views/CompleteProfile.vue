@@ -1,12 +1,15 @@
 <template>
-  <div class="complete-profile-wrapper">
+  <div
+    v-if="dataLoaded"
+    class="complete-profile-wrapper"
+  >
     <header><h3>Complete your profile</h3></header>
     <div class="profile-img-container">
       <b-avatar
         badge
         badge-variant="primary"
         variant="secondary"
-        :src="user.profileImg"
+        :src="user.profileImage"
         size="7rem"
       >
         <template #badge>
@@ -39,12 +42,6 @@
           placeholder="Last Name"
         />
       </div>
-      <!-- <b-form-input
-        v-model="user.dateOfBirth"
-        required
-        type="date"
-        placeholder="Date of birth"
-      /> -->
       <b-form-group
         label="Date of birth"
         label-for="date-of-birth-input"
@@ -90,24 +87,30 @@
 export default {
     data() {
         return {
-            user: {
-                email: "someone@gmail.com",
-                firstName: "",
-                lastName: "",
-                username: "my_username",
-                profileImg: "https://ps.w.org/metronet-profile-picture/assets/icon-256x256.png?rev=2464419",
-                //profileImg: "",
-                city: "",
-                country: "Denmark",
-                dateOfBirth: "",
-                bio: ""
-            }
+            user: {},
+            dataLoaded: false
         }
     },
+    created: async function () {
+        const currentUser = (await this.$axios.get('api/users/current')).data.user
+        this.user = {
+            spotifyUserId: currentUser.id,
+            username: currentUser.display_name,
+            firstName: "",
+            lastName: "",
+            profileImage: currentUser.images ? currentUser.images[0].url : "",
+            dateOfBirth: "",
+            country: currentUser.country ? currentUser.country : "",
+            city: "",
+            bio: ""
+        }
+        this.dataLoaded = true
+    },
     methods: {
-        completeProfile: function (e) {
+        completeProfile: async function (e) {
             e.preventDefault()
             console.log(this.user);
+            await this.$axios.post("api/users", {...this.user})
         },
         editImage: function() {
             console.log('clicked');
