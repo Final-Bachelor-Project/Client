@@ -14,9 +14,13 @@ jobs:
         run: npm install
       - name: Run unit tests
         run: npm run test:unit
-      - name: Run e2e tests
-        uses: cypress-io/github-action@v2
       - name: Run lint
         run: npm run lint
       - name: Building the project
         run: npm run build
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+              start: npm run serve
+              wait-on: 'http://localhost:8080'
+              config: baseUrl=https://localhost:8080
