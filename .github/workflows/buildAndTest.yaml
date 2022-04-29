@@ -1,9 +1,9 @@
 name: buildAndTest
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
