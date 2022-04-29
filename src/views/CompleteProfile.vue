@@ -6,7 +6,7 @@
         badge
         badge-variant="primary"
         variant="secondary"
-        :src="user.profileImg"
+        :src="user.profileImage"
         size="7rem"
       >
         <template #badge>
@@ -29,23 +29,19 @@
     >
       <div class="flex-container">
         <b-form-input
+          id="first-name"
           v-model="user.firstName"
           required
           placeholder="First Name"
         />
         <b-form-input
+          id="last-name"
           v-model="user.lastName"
           required
           placeholder="Last Name"
         />
       </div>
-      <!-- <b-form-input
-        v-model="user.dateOfBirth"
-        required
-        type="date"
-        placeholder="Date of birth"
-      /> -->
-      <b-form-group
+      <b-form-group 
         label="Date of birth"
         label-for="date-of-birth-input"
       >
@@ -57,17 +53,20 @@
         />
         <div class="flex-container">
           <b-form-input
+            id="city"
             v-model="user.city"
             required
             placeholder="City"
           />
           <b-form-input
+            id="country"
             v-model="user.country"
             required
             placeholder="Country"
           />
         </div>
-        <b-form-textarea 
+        <b-form-textarea
+          id="bio"
           v-model="user.bio"
           placeholder="Tell us something about yourself..."
           rows="3"
@@ -75,6 +74,7 @@
         />
         <div class="text-center mt-4">
           <b-button
+            id="complete-btn"
             class="large-btn-mobile"
             type="submit"
             variant="primary"
@@ -90,24 +90,37 @@
 export default {
     data() {
         return {
-            user: {
-                email: "someone@gmail.com",
-                firstName: "",
-                lastName: "",
-                username: "my_username",
-                profileImg: "https://ps.w.org/metronet-profile-picture/assets/icon-256x256.png?rev=2464419",
-                //profileImg: "",
-                city: "",
-                country: "Denmark",
-                dateOfBirth: "",
-                bio: ""
-            }
+            user: {},
+        }
+    },
+    created: async function () {
+        const currentUser = (await this.$axios.get('api/users/current')).data.user
+        this.user = {
+            spotifyUserId: currentUser.id,
+            username: currentUser.display_name,
+            firstName: "",
+            lastName: "",
+            profileImage: currentUser.images ? currentUser.images[0].url : "",
+            dateOfBirth: "",
+            country: currentUser.country ? currentUser.country : "",
+            city: "",
+            bio: ""
         }
     },
     methods: {
-        completeProfile: function (e) {
+        completeProfile: async function (e) {
             e.preventDefault()
-            console.log(this.user);
+            await this.$axios.post("api/users", {...this.user})
+            this.$router.push({path: '/explore'});
+            this.makeToast()
+        },
+        makeToast() {
+            this.$root.$bvToast.toast('', {
+                title: 'Profile completed!',
+                variant: 'success',
+                toaster: 'b-toaster-top-center',
+                solid: true
+            })
         },
         editImage: function() {
             console.log('clicked');

@@ -1,6 +1,6 @@
 const LoginPage = () => import("../views/Login.vue");
 const CompleteProfile = () => import("../views/CompleteProfile.vue");
-
+const ExplorePage = () => import("../views/ExplorePage.vue")
 
 const routes = [
     {
@@ -13,6 +13,11 @@ const routes = [
         name: "Complete Profile",
         component: CompleteProfile
     },
+    {
+        path: "/explore",
+        name: "Explore",
+        component: ExplorePage
+    }
 
 ]
 
