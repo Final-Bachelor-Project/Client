@@ -6,7 +6,7 @@
     >
       <b-icon
         class="m-4"
-        scale="2.5"
+        scale="2.2"
         icon="justify"
       />
     </a>
