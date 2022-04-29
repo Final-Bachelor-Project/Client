@@ -1,6 +1,8 @@
 :root {
     --spotify-green: #1DB954;
-    --white: #FFFFFF
+    --white: #FFFFFF;
+    --black-default: #2c3e50;
+    --primary: #5E72EB;
 }
 
 .btn-spotify-green {
