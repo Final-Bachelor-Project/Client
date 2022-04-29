@@ -28,6 +28,13 @@
               >
                 Explore
               </b-nav-item>
+              <b-nav-item
+                to="/requests"
+                active
+                @click="hide"
+              >
+                Pending requests
+              </b-nav-item>
             </b-nav>
           </nav>
         </div>

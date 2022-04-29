@@ -12,6 +12,7 @@
       pill
       size="sm"
       variant="primary"
+      @click="sendRequest"
     >
       <b-icon icon="person-plus" />
     </b-button>
@@ -27,8 +28,20 @@ export default {
 
         }
     },
-    created: function() {
-        console.log(this.user);
+    methods: {
+        sendRequest: async function() {
+            const request = await this.$axios({
+                method: 'POST',
+                url: 'api/requests',
+                data: {
+                    receiverId: this.user._id
+                }
+            });
+            if(request.status == 200) {
+                this.$emit('requestSent', this.user.username)
+            }
+
+        }
     }
 }
 </script>

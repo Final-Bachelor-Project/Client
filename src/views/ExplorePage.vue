@@ -6,6 +6,7 @@
         v-for="user in users"
         :key="user.id"
         :user="user"
+        @requestSent="makeToast"
       />
     </div>
   </div>
@@ -28,7 +29,14 @@ export default {
         this.users = users.data;
     },
     methods: {
-        
+        makeToast(username) {
+            this.$bvToast.toast('', {
+                title: `Request sent to ${username}`,
+                variant: 'success',
+                toaster: 'b-toaster-top-center',
+                solid: true
+            })
+        },
     }
 }
 </script>
