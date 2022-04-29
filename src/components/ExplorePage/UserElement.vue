@@ -1,16 +1,21 @@
 <template>
-  <div class="img-container">
-    <b-img
-      :src="user.profileImage"
-      rounded
-      class="user-image"
-    />
-    <div class="user-info">
-      <h6>
-        {{ user.username }}
-      </h6>
-    </div>
-  </div>
+  <b-card
+    :img-src="user.profileImage"
+    img-alt="Image"
+    img-top
+    body-class="card-body-container"
+    class="img-container"
+    img-height="70%"
+  >
+    <h6>{{ user.username }}</h6>
+    <b-button
+      pill
+      size="sm"
+      variant="primary"
+    >
+      <b-icon icon="person-plus" />
+    </b-button>
+  </b-card>
 </template>
 <script>
 export default {
@@ -30,29 +35,26 @@ export default {
 <style scoped>
 .img-container {
     width: 11rem;
-    height: 14rem;
+    height: 16rem;
     position: relative;
-}
-.user-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     border-radius: 0.6rem !important;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 15%);
 }
 
-.user-info {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding-top: 0.2rem;
-    color: var(--white);
-    background-color: rgba(0, 0, 0, 0.2);
-    border-bottom-right-radius: 0.6rem;
-    border-bottom-left-radius: 0.6rem;
+.img-container img {
+    object-fit: cover;
+    border-top-left-radius: 0.6rem !important;
+    border-top-right-radius: 0.6rem !important;
 }
 
-.user-info h6 {
-    font-weight: 800;
+.card-body-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h6{
+    margin-bottom: 0;
 }
 </style>

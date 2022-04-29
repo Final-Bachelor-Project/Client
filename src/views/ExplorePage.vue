@@ -42,8 +42,4 @@ export default {
     margin: 0.5rem;
 }
 
-/* .users-container div {
-    margin: 0.5rem;
-} */
-
 </style>
