@@ -10,6 +10,7 @@
         Connect with people that share your taste in music
       </p>
       <b-button
+        id="spotify-login-btn"
         variant="spotify-green"
         class="mt-4 position-relative large-btn-mobile"
         href="/api/login"

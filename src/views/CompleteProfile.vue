@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="dataLoaded"
-    class="complete-profile-wrapper"
-  >
+  <div class="complete-profile-wrapper">
     <header><h3>Complete your profile</h3></header>
     <div class="profile-img-container">
       <b-avatar
@@ -32,17 +29,19 @@
     >
       <div class="flex-container">
         <b-form-input
+          id="first-name"
           v-model="user.firstName"
           required
           placeholder="First Name"
         />
         <b-form-input
+          id="last-name"
           v-model="user.lastName"
           required
           placeholder="Last Name"
         />
       </div>
-      <b-form-group
+      <b-form-group 
         label="Date of birth"
         label-for="date-of-birth-input"
       >
@@ -54,17 +53,20 @@
         />
         <div class="flex-container">
           <b-form-input
+            id="city"
             v-model="user.city"
             required
             placeholder="City"
           />
           <b-form-input
+            id="country"
             v-model="user.country"
             required
             placeholder="Country"
           />
         </div>
-        <b-form-textarea 
+        <b-form-textarea
+          id="bio"
           v-model="user.bio"
           placeholder="Tell us something about yourself..."
           rows="3"
@@ -72,6 +74,7 @@
         />
         <div class="text-center mt-4">
           <b-button
+            id="complete-btn"
             class="large-btn-mobile"
             type="submit"
             variant="primary"
@@ -88,7 +91,6 @@ export default {
     data() {
         return {
             user: {},
-            dataLoaded: false
         }
     },
     created: async function () {
@@ -104,12 +106,21 @@ export default {
             city: "",
             bio: ""
         }
-        this.dataLoaded = true
     },
     methods: {
         completeProfile: async function (e) {
             e.preventDefault()
             await this.$axios.post("api/users", {...this.user})
+            this.$router.push({path: '/explore'});
+            this.makeToast()
+        },
+        makeToast() {
+            this.$root.$bvToast.toast('', {
+                title: 'Profile completed!',
+                variant: 'success',
+                toaster: 'b-toaster-top-center',
+                solid: true
+            })
         },
         editImage: function() {
             console.log('clicked');
