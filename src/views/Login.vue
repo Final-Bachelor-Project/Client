@@ -10,8 +10,9 @@
         Connect with people that share your taste in music
       </p>
       <b-button
+        id="spotify-login-btn"
         variant="spotify-green"
-        class="mt-4 spotify-login-btn"
+        class="mt-4 position-relative large-btn-mobile"
         href="/api/login"
       >
         <img
@@ -40,13 +41,6 @@ export default {
 
 .logo-img {
     width: 100%;
-    position: relative;
-}
-
-.spotify-login-btn {
-    font-size: 1.2rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
     position: relative;
 }
 

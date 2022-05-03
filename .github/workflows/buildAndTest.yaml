@@ -1,9 +1,9 @@
 name: buildAndTest
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
@@ -18,3 +18,9 @@ jobs:
         run: npm run lint
       - name: Building the project
         run: npm run build
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+              build: npm run build
+              start: npm run serve
+              wait-on: 'http://localhost:8080'
