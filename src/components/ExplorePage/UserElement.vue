@@ -23,11 +23,6 @@ export default {
     props: [
         'user'
     ],
-    data() {
-        return {
-
-        }
-    },
     methods: {
         sendRequest: async function() {
             const request = await this.$axios({
@@ -50,8 +45,6 @@ export default {
     width: 11rem;
     height: 16rem;
     position: relative;
-    border-radius: 0.6rem !important;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 15%);
 }
 
 .img-container img {
