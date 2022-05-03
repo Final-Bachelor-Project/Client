@@ -1,23 +1,27 @@
 <template>
   <div id="app">
-    <router-view />
+    <Login />
   </div>
 </template>
 
 <script>
+import Login from './views/Login.vue'
 
 export default {
   name: 'App',
+  components: {
+    Login
+  }
 }
 </script>
 
-<style lang="scss">
+<style>
 @import './assets/css/global.css';
-@import './assets/scss/custom.scss';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--black-default);
+  text-align: center;
+  color: #2c3e50; */
 }
 </style>

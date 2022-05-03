@@ -1,16 +1,9 @@
 :root {
     --spotify-green: #1DB954;
-    --white: #FFFFFF;
-    --black-default: #2c3e50;
-    --primary: #5E72EB;
+    --white: #FFFFFF
 }
 
 .btn-spotify-green {
     background-color: var(--spotify-green) !important;
     color: var(--white) !important;
-}
-
-.large-btn-mobile {
-    width: 20rem;
-    font-size: 1.2rem;
 }

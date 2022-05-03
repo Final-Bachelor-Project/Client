@@ -9,7 +9,4 @@ module.exports = {
         'vue/no-unused-vars': 'error'
     },
     parser: "vue-eslint-parser",
-    parserOptions: {
-        parser: "babel-eslint"
-    },
 }
