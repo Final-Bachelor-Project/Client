@@ -2,6 +2,7 @@ const LoginPage = () => import("../views/Login.vue");
 const CompleteProfile = () => import("../views/CompleteProfile.vue");
 const ExplorePage = () => import("../views/ExplorePage.vue")
 const Requests = () => import("../views/Requests.vue")
+const Connections = () => import("../views/Connections.vue")
 
 const routes = [
     {
@@ -23,6 +24,11 @@ const routes = [
         path: "/requests",
         name: "Pending requests",
         component: Requests
+    },
+    {
+        path: "/connections",
+        name: "Connections",
+        component: Connections
     }
 
 ]

@@ -72,7 +72,7 @@ export default {
 <style scoped>
 .request-container {
     display: flex;
-    direction: row;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
