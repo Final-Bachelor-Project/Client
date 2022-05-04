@@ -6,7 +6,7 @@
         v-for="user in users"
         :key="user.id"
         :user="user"
-        @requestSent="makeToast"
+        @requestSent="requestSent"
       />
     </div>
   </div>
@@ -25,8 +25,7 @@ export default {
         }
     },
     created: async function () {
-        const users = (await this.$axios.get('api/users'));
-        this.users = users.data;
+        await this.getUsers()
     },
     methods: {
         makeToast(username) {
@@ -37,6 +36,14 @@ export default {
                 solid: true
             })
         },
+        getUsers: async function() {
+            const users = (await this.$axios.get('api/users'));
+            this.users = users.data;
+        },
+        requestSent: async function() {
+            await this.getUsers();
+            this.makeToast()
+        }
     }
 }
 </script>
@@ -45,9 +52,8 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.5rem;
-    margin: 0.5rem;
+    margin: 0.8rem;
 }
 
 </style>
