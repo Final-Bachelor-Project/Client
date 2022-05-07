@@ -23,17 +23,24 @@
             <b-nav vertical>
               <b-nav-item
                 to="/explore"
-                active
+                :active="isActive('Explore')"
                 @click="hide"
               >
                 Explore
               </b-nav-item>
               <b-nav-item
                 to="/requests"
-                active
+                :active="isActive('Pending requests')"
                 @click="hide"
               >
                 Pending requests
+              </b-nav-item>
+              <b-nav-item
+                to="/connections"
+                :active="isActive('Connections')"
+                @click="hide"
+              >
+                My connections
               </b-nav-item>
             </b-nav>
           </nav>
@@ -44,7 +51,11 @@
 </template>
 <script>
 export default {
-    
+    methods: {
+        isActive: function(name) {
+            return name == this.$route.name
+        }
+    }
 }
 </script>
 <style scoped>

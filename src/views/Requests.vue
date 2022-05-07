@@ -2,6 +2,7 @@
   <div>
     <Navbar />
     <div
+      v-if="requests.length"
       class="requests-container"
     >
       <Request
@@ -10,6 +11,14 @@
         :request="request"
         @update="updateRequestStatus"
       />
+    </div>
+    <div
+      v-else
+      class="text-center mt-4"
+    >
+      <h4>
+        You have no pending requests
+      </h4>
     </div>
   </div>
 </template>
@@ -30,11 +39,12 @@ export default {
         getRequests: async function() {
             try{
                 const requests = await this.$axios.get('api/requests');
-                if(requests.status == 200) {
-                    this.requests = requests.data
-                } 
+                this.requests = requests.data
+                console.log(this.requests);
             } catch(error) {
-                this.requests = []
+                if(error.response.status === 404) {
+                    this.requests = []
+                }
             }
         },
         updateRequestStatus: async function(data) {

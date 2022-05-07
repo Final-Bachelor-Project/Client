@@ -27,5 +27,7 @@ export default {
 }
 </script>
 <style scoped>
-
+.navbar {
+    padding-left: 0rem;
+}
 </style>
