@@ -1,6 +1,10 @@
 <template>
   <div>
     <Navbar />
+    <div class="matches-header">
+      <h4>Your suggestions</h4>
+      <h6>based on your Spotify top artists and tracks</h6>
+    </div>
     <div class="users-container">
       <UserElement
         v-for="user in users"
@@ -52,8 +56,19 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
     margin: 0.8rem;
+    /* margin-top: 5.5rem; */
+}
+
+.matches-header {
+    margin-top: 5.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.matches-header h4 {
+    color: var(--primary);
 }
 
 </style>

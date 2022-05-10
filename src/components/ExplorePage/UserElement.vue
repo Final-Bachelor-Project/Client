@@ -7,6 +7,13 @@
     class="img-container"
     img-height="70%"
   >
+    <b-badge
+      class="score"
+      variant="primary"
+    >
+      {{ user.score }}% Match
+    </b-badge>
+
     <h6>{{ user.username }}</h6>
     <b-button
       pill
@@ -42,7 +49,7 @@ export default {
 </script>
 <style scoped>
 .img-container {
-    width: 11rem;
+    width: 10.8rem;
     height: 16rem;
     position: relative;
 }
@@ -62,5 +69,25 @@ export default {
 
 h6{
     margin-bottom: 0;
+}
+
+.score {
+    position: absolute;
+    right: 10%;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    top: 0%;
+    /* padding: 0.2rem;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem; */
+    width: 5.5rem;
+    height: 1.5rem;
+    border-bottom-right-radius: 25%;
+    border-bottom-left-radius: 25%;
+    padding: 0.3rem;
+    /* background-color:rgb(0, 255, 0);opacity:0.5;   */
 }
 </style>

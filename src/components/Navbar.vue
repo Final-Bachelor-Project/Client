@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixed-top nav--background">
     <b-navbar>
       <b-navbar-brand>
         <Sidebar />
@@ -27,7 +27,11 @@ export default {
 }
 </script>
 <style scoped>
+.nav--background {
+  background-color: var(--white);
+}
+
 .navbar {
-    padding-left: 0rem;
+  padding: 0;
 }
 </style>
