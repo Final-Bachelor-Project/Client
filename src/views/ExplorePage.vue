@@ -1,12 +1,16 @@
 <template>
   <div>
     <Navbar />
+    <div class="matches-header">
+      <h4>Your suggestions</h4>
+      <h6>based on your Spotify top artists and tracks</h6>
+    </div>
     <div class="users-container">
       <UserElement
         v-for="user in users"
         :key="user.id"
         :user="user"
-        @requestSent="makeToast"
+        @requestSent="requestSent"
       />
     </div>
   </div>
@@ -25,8 +29,7 @@ export default {
         }
     },
     created: async function () {
-        const users = (await this.$axios.get('api/users'));
-        this.users = users.data;
+        await this.getUsers()
     },
     methods: {
         makeToast(username) {
@@ -37,6 +40,14 @@ export default {
                 solid: true
             })
         },
+        getUsers: async function() {
+            const users = (await this.$axios.get('api/users'));
+            this.users = users.data;
+        },
+        requestSent: async function() {
+            await this.getUsers();
+            this.makeToast()
+        }
     }
 }
 </script>
@@ -45,9 +56,19 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0.5rem;
+    gap: 1rem;
+    margin: 0.8rem;
+    /* margin-top: 5.5rem; */
+}
+
+.matches-header {
+    margin-top: 5.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.matches-header h4 {
+    color: var(--primary);
 }
 
 </style>
