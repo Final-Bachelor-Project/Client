@@ -94,7 +94,7 @@ export default {
         }
     },
     created: async function () {
-        const currentUser = (await this.$axios.get('api/users/current')).data.user
+        const currentUser = (await this.$axios.get('/api/users/current')).data.user
         this.user = {
             spotifyUserId: currentUser.id,
             username: currentUser.display_name,
@@ -110,7 +110,7 @@ export default {
     methods: {
         completeProfile: async function (e) {
             e.preventDefault()
-            await this.$axios.post("api/users", {...this.user})
+            await this.$axios.post("/api/users", {...this.user})
             this.$router.push({path: '/explore'});
             this.makeToast()
         },
