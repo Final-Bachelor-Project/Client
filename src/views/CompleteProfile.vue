@@ -94,7 +94,8 @@ export default {
         }
     },
     created: async function () {
-      console.log(await this.$axios.get('http://207.154.223.42/api/users/current', {withCredentials: true}));
+        const test = (await this.$axios.get('/api/login/test')).data
+        console.log(test);
         const currentUser = (await this.$axios.get('/api/users/current', {withCredentials: true})).data.user
         this.user = {
             spotifyUserId: currentUser.id,
