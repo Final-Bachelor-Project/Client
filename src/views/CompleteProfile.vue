@@ -94,7 +94,7 @@ export default {
         }
     },
     created: async function () {
-        const currentUser = (await this.$axios.get('/api/users/current')).data.user
+        const currentUser = (await this.$axios.get('http://167.172.189.64/api/users/current')).data.user
         this.user = {
             spotifyUserId: currentUser.id,
             username: currentUser.display_name,
