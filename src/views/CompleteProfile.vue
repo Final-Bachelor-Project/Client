@@ -94,7 +94,7 @@ export default {
         }
     },
     created: async function () {
-        const test = (await this.$axios.get('/api/login/test')).data;
+        const test = (await this.$axios.get('/api/login/test'));
         console.log(test);
         const currentUser = (await this.$axios.get('/api/users/current', {withCredentials: true})).data.user
         this.user = {
