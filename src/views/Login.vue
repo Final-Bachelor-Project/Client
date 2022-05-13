@@ -34,6 +34,7 @@ export default {
     },
     methods: {
         async login() {
+          console.log(`${process.env.VUE_APP_API_URL}/api/login`);
           await this.$axios.get(`${process.env.VUE_APP_API_URL}/api/login`)
         }
     }
