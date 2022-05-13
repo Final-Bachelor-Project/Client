@@ -13,7 +13,7 @@
         id="spotify-login-btn"
         variant="spotify-green"
         class="mt-4 position-relative large-btn-mobile"
-        @click="login()"
+        href="/api/login"
       >
         <img
           class="spotify-logo"
@@ -33,9 +33,7 @@ export default {
         }
     },
     methods: {
-        async login() {
-          await this.$axios.get(`${process.env.VUE_APP_API_URL}/api/login`)
-        }
+        
     }
 }
 </script>

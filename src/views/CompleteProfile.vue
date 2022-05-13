@@ -94,7 +94,7 @@ export default {
         }
     },
     created: async function () {
-        const currentUser = (await this.$axios.get(`${process.env.VUE_APP_API_URL}/api/users/current`)).data.user
+        const currentUser = (await this.$axios.get('/api/users/current')).data.user
         this.user = {
             spotifyUserId: currentUser.id,
             username: currentUser.display_name,
