@@ -13,7 +13,7 @@
         id="spotify-login-btn"
         variant="spotify-green"
         class="mt-4 position-relative large-btn-mobile"
-        href="/api/login"
+        href="/api/auth"
       >
         <img
           class="spotify-logo"

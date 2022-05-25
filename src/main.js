@@ -3,8 +3,9 @@ import App from './App.vue'
 import { BootstrapVue, IconsPlugin, AvatarPlugin } from 'bootstrap-vue'
 import router from "./router/router"
 import axios from 'axios'
-Vue.prototype.$axios = axios
 
+axios.defaults.withCredentials = true;
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)

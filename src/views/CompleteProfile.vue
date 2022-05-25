@@ -106,6 +106,7 @@ export default {
             city: "",
             bio: ""
         }
+        localStorage.loggedInUserId = currentUser.id
     },
     methods: {
         completeProfile: async function (e) {
