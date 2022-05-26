@@ -53,7 +53,10 @@
               Artists
             </b-button>
           </b-button-group>
-          <b-list-group class="top-list">
+          <b-list-group
+            v-if="areTracksShown && tracks.length > 0"
+            class="top-list"
+          >
             <b-list-group-item
               v-for="track in tracks"
               :key="track.id"
@@ -61,6 +64,29 @@
             >
               <b-avatar :src="track.image" />
               {{ track.name }}
+            </b-list-group-item>
+          </b-list-group>
+          <b-list-group v-if="areTracksShown && tracks.length == 0">
+            <b-list-group-item>
+              You don't have any common tracks
+            </b-list-group-item>
+          </b-list-group>
+          <b-list-group
+            v-if="areArtistsShown && artists.length > 0"
+            class="top-list"
+          >
+            <b-list-group-item
+              v-for="artist in artists"
+              :key="artist.id"
+              class="music-list-item"
+            >
+              <b-avatar :src="artist.image" />
+              {{ artist.name }}
+            </b-list-group-item>
+          </b-list-group>
+          <b-list-group v-if="areArtistsShown && artists.length == 0">
+            <b-list-group-item>
+              You don't have any common artists
             </b-list-group-item>
           </b-list-group>
         </div>
@@ -80,18 +106,13 @@ export default {
             showProfileModal: this.showModal,
             user: {},
             tracks: [],
-            // tracks: [{name: "This is song 1", image: "https://i.scdn.co/image/ab67616d0000b2735e6f3b66721a47e39fac4274"}, 
-            // {name: "This is song 2", image: "https://i.scdn.co/image/ab67616d0000b2732160e9ab66ab8c6dffc2e89f"}, 
-            // {name: "This is song 3", image: "https://i.scdn.co/image/ab67616d0000b2739e1cfc756886ac782e363d79"},
-            // {name: "This is song 4", image: "https://i.scdn.co/image/ab67616d0000b27392b32435efed601fc8f1045d"},
-            // {name: "This is song 5", image: "https://i.scdn.co/image/ab67616d0000b2739c4f5071aa00f38f58422c67"}],
+            artists: [],
             areTracksShown: true,
             areArtistsShown: false
         }
     },
     computed: {
       age() {
-        //return this.user.dateOfBirth
         const today = new Date();
         const birthDate = new Date(this.user.dateOfBirth);
         let age = today.getFullYear() - birthDate.getFullYear();
@@ -115,6 +136,7 @@ export default {
     created: async function() {
         this.user = (await this.$axios.get(`api/users/${this.userId}`)).data;
         this.tracks = await this.getCommonTracks()
+        this.artists = await this.getCommonArtists()
     },
     methods: {
         sendRequest: async function() {
@@ -131,6 +153,9 @@ export default {
         },
         getCommonTracks: async function() {
           return (await this.$axios.get(`api/users/tracks/common/${this.user._id}`)).data
+        },
+        getCommonArtists: async function() {
+          return (await this.$axios.get(`api/users/artists/common/${this.user._id}`)).data
         },
         showTracks: function() {
           this.areTracksShown = true
