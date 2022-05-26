@@ -56,7 +56,7 @@
           <b-list-group class="top-list">
             <b-list-group-item
               v-for="track in tracks"
-              :key="track.name"
+              :key="track.id"
               class="music-list-item"
             >
               <b-avatar :src="track.image" />
@@ -79,13 +79,14 @@ export default {
         return {
             showProfileModal: this.showModal,
             user: {},
-            tracks: [{name: "This is song 1", image: "https://i.scdn.co/image/ab67616d0000b2735e6f3b66721a47e39fac4274"}, 
-            {name: "This is song 2", image: "https://i.scdn.co/image/ab67616d0000b2732160e9ab66ab8c6dffc2e89f"}, 
-            {name: "This is song 3", image: "https://i.scdn.co/image/ab67616d0000b2739e1cfc756886ac782e363d79"},
-            {name: "This is song 4", image: "https://i.scdn.co/image/ab67616d0000b27392b32435efed601fc8f1045d"},
-            {name: "This is song 5", image: "https://i.scdn.co/image/ab67616d0000b2739c4f5071aa00f38f58422c67"}],
+            tracks: [],
+            // tracks: [{name: "This is song 1", image: "https://i.scdn.co/image/ab67616d0000b2735e6f3b66721a47e39fac4274"}, 
+            // {name: "This is song 2", image: "https://i.scdn.co/image/ab67616d0000b2732160e9ab66ab8c6dffc2e89f"}, 
+            // {name: "This is song 3", image: "https://i.scdn.co/image/ab67616d0000b2739e1cfc756886ac782e363d79"},
+            // {name: "This is song 4", image: "https://i.scdn.co/image/ab67616d0000b27392b32435efed601fc8f1045d"},
+            // {name: "This is song 5", image: "https://i.scdn.co/image/ab67616d0000b2739c4f5071aa00f38f58422c67"}],
             areTracksShown: true,
-            areArtistsShows: false
+            areArtistsShown: false
         }
     },
     computed: {
@@ -129,15 +130,15 @@ export default {
             }
         },
         getCommonTracks: async function() {
-          return await this.$axios.get(`api/users/tracks/common/${this.user._id}`).data
+          return (await this.$axios.get(`api/users/tracks/common/${this.user._id}`)).data
         },
         showTracks: function() {
           this.areTracksShown = true
-          this.areArtistsShows = false
+          this.areArtistsShown = false
         },
         showArtists: function() {
           this.areTracksShown = false
-          this.areArtistsShows = true
+          this.areArtistsShown = true
         }
     }
 }
