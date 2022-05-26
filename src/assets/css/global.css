@@ -45,6 +45,12 @@
 
 .modal-header--no-border {
     border-bottom: none !important;
-    position: fixed;
+    position: absolute;
     z-index: 1;
+}
+
+@media only screen and (min-width: 575px) {
+    .modal--full-screen {
+        margin: 1.75rem auto !important;
+    }
 }

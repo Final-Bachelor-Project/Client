@@ -37,7 +37,7 @@
           <h4>About {{ user.username }}</h4>
           <p>{{ user.bio }}</p>
         </div>
-        <div class="shared-music text-center">
+        <div class="shared-music text-center mb-4">
           <h4>Top music you share</h4>
           <b-button-group class="buttons">
             <b-button

@@ -1,11 +1,10 @@
 <template>
-  <div>
+  <div class="img-container">
     <b-card
       :img-src="user.profileImage"
       img-alt="Image"
       img-top
       body-class="card-body-container"
-      class="img-container"
       img-height="70%"
       @click="openProfile"
     >
@@ -74,9 +73,15 @@ export default {
 </script>
 <style scoped>
 .img-container {
-    width: 10.8rem;
+    min-width: 10rem;
+    max-width: 14rem;
     height: 16rem;
     position: relative;
+}
+
+.img-container div {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
 
 .img-container img {

@@ -13,7 +13,7 @@
     <b-sidebar
       id="sidebar"
       no-header
-      width="60%"
+      
       shadow
       backdrop
     >
