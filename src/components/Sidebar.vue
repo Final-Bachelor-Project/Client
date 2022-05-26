@@ -22,7 +22,7 @@
           <nav class="mt-3">
             <b-nav vertical>
               <b-nav-item
-                to="/explore"
+                to="/"
                 :active="isActive('Explore')"
                 @click="hide"
               >
@@ -42,6 +42,11 @@
               >
                 My connections
               </b-nav-item>
+              <b-nav-item
+                @click="logout"
+              >
+                Logout
+              </b-nav-item>
             </b-nav>
           </nav>
         </div>
@@ -54,6 +59,10 @@ export default {
     methods: {
         isActive: function(name) {
             return name == this.$route.name
+        },
+        logout: async function() {
+          await this.$axios.post('/api/auth/logout')
+          this.$router.push({path: '/login'})
         }
     }
 }

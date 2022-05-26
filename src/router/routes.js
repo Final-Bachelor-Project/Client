@@ -16,7 +16,7 @@ const routes = [
         component: CompleteProfile
     },
     {
-        path: "/explore",
+        path: "/",
         name: "Explore",
         component: ExplorePage
     },
