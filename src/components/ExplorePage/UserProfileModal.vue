@@ -53,7 +53,7 @@
               Artists
             </b-button>
           </b-button-group>
-          <b-list-group>
+          <b-list-group class="top-list">
             <b-list-group-item
               v-for="track in tracks"
               :key="track.name"
@@ -194,10 +194,21 @@ export default {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     box-shadow: 0 1px 0px 0 rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 15%);
-    background-color: rgb(94, 114, 235, 0.06);
 }
 
 .buttons {
   width: -webkit-fill-available;
+}
+
+.buttons button {
+    box-shadow: 0 1px 0px 0 rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 15%);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.top-list {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 </style>
