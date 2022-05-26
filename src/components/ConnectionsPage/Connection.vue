@@ -16,12 +16,20 @@
       class="mr-2 ml-auto"
       font-scale="2.5"
       icon="chat-dots"
+      @click="goToChatroom"
     />
   </b-card>
 </template>
 <script>
 export default {
-    props: ['connection']
+    props: ['connection'],
+    methods: {
+      goToChatroom: function() {
+        // get the chat id
+        //this.$router.push({path: `/chatroom/${chatId}`})
+        this.$router.push({path: `/chatroom`})
+      }
+    }
 }
 </script>
 <style scoped>

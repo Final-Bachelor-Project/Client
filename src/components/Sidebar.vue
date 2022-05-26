@@ -43,6 +43,13 @@
                 My connections
               </b-nav-item>
               <b-nav-item
+                to="/chats"
+                :active="isActive('Chats')"
+                @click="hide"
+              >
+                Chats
+              </b-nav-item>
+              <b-nav-item
                 @click="logout"
               >
                 Logout
