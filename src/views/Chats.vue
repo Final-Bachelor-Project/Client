@@ -25,16 +25,18 @@ export default {
     },
     data() {
         return {
-            chats: [
-                {participant: {profileImg: "https://i.scdn.co/image/ab6775700000ee857271df232529e4ad92fa03ed", username: "username"}, lastMessage: {sentByLoggedInUser: false, content: "message content", date: "2022-05-25"}},
-                {participant: {profileImg: "https://cdn.shopify.com/s/files/1/1566/2889/articles/PORTADA-TC.jpg?v=1625573349", username: "username 2"}, lastMessage: {sentByLoggedInUser: true, content: "message content", date: "2022-05-25"}}
-                ]
+            chats: []
         }
+    },
+    created: async function() {
+        this.chats = await this.getChats()
     },
     methods: {
         goToChatroom: function(id) {
-            //this.$router.push({path: `/chatroom/${id}`})
-            this.$router.push({path: `/chatroom`})
+            this.$router.push({path: `/chatroom/${id}`})
+        },
+        getChats: async function() {
+            return (await this.$axios.get(`api/chats`)).data
         }
     }
 }

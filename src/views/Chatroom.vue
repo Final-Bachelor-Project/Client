@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div />
     <div class="chat-input-container">
       <b-form-textarea
         v-model="messageText"
@@ -37,8 +38,13 @@ export default {
                 {sentByLoggedInUser: false, content: "this is a another message", dateTime: 1653554115000},
                 {sentByLoggedInUser: true, content: "one more message", dateTime: 1653554715000},
                 {sentByLoggedInUser: false, content: "another one here", dateTime: 1653555315000}
-                ]
+                ],
+            chat: {}
         }
+    },
+    created: async function() {
+        const chat = await this.$axios.get(`/api/chats/${this.$route.params.id}`)
+        this.chat = chat.data
     }
 }
 </script>
@@ -65,7 +71,10 @@ export default {
     max-height: 38px;
 }
 
-.message-container {
-    bottom: 0;
+.messages-container {
+    bottom: 5rem;
+    position: absolute;
+    left: 0;
+    width: -webkit-fill-available;
 }
 </style>

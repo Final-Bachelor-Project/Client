@@ -40,7 +40,6 @@ export default {
             try{
                 const requests = await this.$axios.get('api/requests');
                 this.requests = requests.data
-                console.log(this.requests);
             } catch(error) {
                 if(error.response.status === 404) {
                     this.requests = []

@@ -31,7 +31,6 @@ export default {
             try{
                 const connections = await this.$axios.get('api/users/current/connections');
                 this.connections = connections.data
-                console.log(this.connections);
             } catch(error) {
                 if(error.response.status === 404) {
                     this.connections = []

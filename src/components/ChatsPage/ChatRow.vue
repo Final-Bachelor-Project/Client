@@ -3,11 +3,11 @@
     <b-avatar
       class="mr-3"
       size="3.5rem"
-      :src="participant.profileImg"
+      :src="user.profileImage"
     />
     <div>
       <h4 class="mb-0">
-        {{ participant.username }}
+        {{ user.username }}
       </h4>
       <p class="mb-0 message">
         <span v-if="lastMessage.sentByLoggedInUser">You: </span>{{ lastMessage.content }}
@@ -31,8 +31,9 @@ export default {
     ],
     data() {
         return {
-            participant: this.chat.participant,
-            lastMessage: this.chat.lastMessage
+            user: this.chat.user,
+            //lastMessage: this.chat.lastMessage
+            lastMessage: {}
         }
     }
 }

@@ -24,10 +24,9 @@
 export default {
     props: ['connection'],
     methods: {
-      goToChatroom: function() {
-        // get the chat id
-        //this.$router.push({path: `/chatroom/${chatId}`})
-        this.$router.push({path: `/chatroom`})
+      goToChatroom: async function() {
+        const chat = await this.$axios.get(`api/chats/users/${this.connection._id}`)
+        this.$router.push({path: `/chatroom/${chat.data._id}`})
       }
     }
 }
