@@ -113,6 +113,7 @@ export default {
     },
     created: async function() {
         this.user = (await this.$axios.get(`api/users/${this.userId}`)).data;
+        this.tracks = await this.getCommonTracks()
     },
     methods: {
         sendRequest: async function() {
@@ -127,14 +128,17 @@ export default {
                 this.$emit('requestSent', this.user.username)
             }
         },
-      showTracks: function() {
-        this.areTracksShown = true
-        this.areArtistsShows = false
-      },
-      showArtists: function() {
-        this.areTracksShown = false
-        this.areArtistsShows = true
-      }
+        getCommonTracks: async function() {
+          return await this.$axios.get(`api/users/tracks/common/${this.user._id}`).data
+        },
+        showTracks: function() {
+          this.areTracksShown = true
+          this.areArtistsShows = false
+        },
+        showArtists: function() {
+          this.areTracksShown = false
+          this.areArtistsShows = true
+        }
     }
 }
 </script>
