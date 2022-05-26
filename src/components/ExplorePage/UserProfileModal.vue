@@ -149,6 +149,7 @@ export default {
             });
             if(request.status == 200) {
                 this.$emit('requestSent', this.user.username)
+                this.showProfileModal = false
             }
         },
         getCommonTracks: async function() {
