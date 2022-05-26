@@ -43,6 +43,7 @@ export default {
 </script>
 <style scoped>
 .connections-container {
-    margin: 0.8rem
+    margin: 0.8rem;
+    margin-top: 5.5rem;
 }
 </style>

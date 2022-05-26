@@ -70,5 +70,6 @@ export default {
 <style scoped>
 .requests-container {
     margin: 0.8rem;
+    margin-top: 5.5rem;
 }
 </style>
