@@ -25,7 +25,6 @@ describe('Complete profile flow', () => {
         cy.get('textarea[id="bio"]').type('Bio')
         cy.get('#complete-btn').click()
         cy.wait(['@createUser'])
-        cy.url().should('include', '/')
-        //cy.contains('Profile completed!')
+        cy.contains('Your suggestions')
     })
 })
