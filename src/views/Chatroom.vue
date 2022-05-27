@@ -1,6 +1,16 @@
 <template>
   <div>
     <div />
+    <div
+      v-if="messages.lenght"
+      class="messages-container"
+    >
+      <Message
+        v-for="message in messages"
+        :key="message.id"
+        :message="message"
+      />
+    </div>
     <div class="chat-input-container">
       <b-form-textarea
         v-model="messageText"
@@ -11,16 +21,10 @@
         variant="primary"
         pill
         class="px-2 py-1"
+        @click="sendMessage"
       >
         <i class="bi bi-send" />
       </b-button>
-    </div>
-    <div class="messages-container">
-      <Message
-        v-for="message in messages"
-        :key="message.id"
-        :message="message"
-      />
     </div>
   </div>
 </template>
@@ -33,18 +37,36 @@ export default {
     data() {
         return {
             messageText: "",
-            messages: [
-                {sentByLoggedInUser: true, content: "this is a message", dateTime: 1653553755000},
-                {sentByLoggedInUser: false, content: "this is a another message", dateTime: 1653554115000},
-                {sentByLoggedInUser: true, content: "one more message", dateTime: 1653554715000},
-                {sentByLoggedInUser: false, content: "another one here", dateTime: 1653555315000}
-                ],
-            chat: {}
+            messages: [],
+            chat: {},
+        }
+    },
+    sockets:{
+        socket(data) {
+            console.log('socket', data);
+        },
+        io(data) {
+            console.log('io', data);
         }
     },
     created: async function() {
         const chat = await this.$axios.get(`/api/chats/${this.$route.params.id}`)
         this.chat = chat.data
+        this.$socket.emit('user-joined', {
+            chatId: this.chat.id
+        })
+        const messages = await this.$axios.get(`/api/messages/chat/${this.$route.params.id}`)
+        this.messages = messages
+    },
+    methods: {
+        sendMessage: function() {
+            // this.$socket.emit('newMessage', {
+            //     room: this.getCurrentRoom,
+            //     user: this.getUserData,
+            //     admin: true,
+            //     content: ''
+            // })
+        }
     }
 }
 </script>

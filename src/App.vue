@@ -8,6 +8,11 @@
 
 export default {
   name: 'App',
+  sockets: {
+    connect: function () {
+      console.log('socket connected')
+    }
+  },
 }
 </script>
 
