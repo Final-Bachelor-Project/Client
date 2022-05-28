@@ -5,6 +5,7 @@ const Requests = () => import("../views/Requests.vue")
 const Connections = () => import("../views/Connections.vue")
 const Chats = () => import("../views/Chats.vue")
 const Chatroom = () => import("../views/Chatroom.vue")
+const EditProfile = () => import("../views/EditProfile.vue");
 
 const routes = [
     {
@@ -41,6 +42,11 @@ const routes = [
         path: "/chatroom/:id",
         name: "Chatroom",
         component: Chatroom
+    },
+    {
+        path: "/edit",
+        name: "Edit profile",
+        component: EditProfile
     }
 
 ]
