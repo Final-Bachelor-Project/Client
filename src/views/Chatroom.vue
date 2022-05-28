@@ -2,7 +2,7 @@
   <div>
     <div />
     <div
-      v-if="messages.lenght"
+      v-if="messages.length > 0"
       class="messages-container"
     >
       <Message
@@ -42,30 +42,27 @@ export default {
         }
     },
     sockets:{
-        socket(data) {
-            console.log('socket', data);
-        },
-        io(data) {
-            console.log('io', data);
+        messageReceived(data) {
+            console.log(data);
+            //messages.push()
         }
     },
     created: async function() {
         const chat = await this.$axios.get(`/api/chats/${this.$route.params.id}`)
         this.chat = chat.data
-        this.$socket.emit('user-joined', {
+        this.$socket.emit('userJoined', {
             chatId: this.chat.id
         })
         const messages = await this.$axios.get(`/api/messages/chat/${this.$route.params.id}`)
-        this.messages = messages
+        this.messages = messages.data
     },
     methods: {
         sendMessage: function() {
-            // this.$socket.emit('newMessage', {
-            //     room: this.getCurrentRoom,
-            //     user: this.getUserData,
-            //     admin: true,
-            //     content: ''
-            // })
+            this.$socket.emit('newMessage', {
+                chatId: this.chat.id,
+                content: this.messageText,
+                sentBy: localStorage.loggedInUser._id
+            })
         }
     }
 }

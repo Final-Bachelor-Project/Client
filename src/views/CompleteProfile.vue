@@ -106,7 +106,7 @@ export default {
             city: "",
             bio: ""
         }
-        localStorage.loggedInUserId = currentUser.id
+        localStorage.spotifyUserId = this.user.spotifyUserId
     },
     methods: {
         completeProfile: async function (e) {

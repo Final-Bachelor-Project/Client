@@ -30,7 +30,9 @@ export default {
     },
     created: async function () {
         const currentUser = (await this.$axios.get('/api/users/current', {withCredentials: true})).data.user
-        localStorage.loggedInUserId = currentUser.id
+        console.log(currentUser.id);
+        const loggedInUser = (await this.$axios.get('/api/users/find', {withCredentials: true})).data.user
+        localStorage.loggedInUser = loggedInUser
         await this.getUsers()
     },
     methods: {

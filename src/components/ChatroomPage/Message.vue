@@ -1,7 +1,7 @@
 <template>
   <div
     class="message"
-    :class="message.sentByLoggedInUser ? 'message-current-user' : 'message-user'"
+    :class="sentByLoggedInUser ? 'message-current-user' : 'message-user'"
   >
     <p class="mb-0">
       {{ message.content }}
@@ -16,6 +16,11 @@ export default {
     setup() {
         
     },
+    computed: {
+        sentByLoggedInUser() {
+            return this.message.sentBy == localStorage.loggedInUser._id
+        }
+    }
 }
 </script>
 <style scoped>
