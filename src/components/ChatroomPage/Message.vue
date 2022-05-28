@@ -25,10 +25,11 @@ export default {
 </script>
 <style scoped>
 .message {
-    width: 10rem;
+    max-width: 15rem;
     padding: 0.8rem;
     border-radius: 0.5rem;
     font-weight: 600;
+    width: fit-content;
 }
 .message-current-user {
     margin-left: auto;

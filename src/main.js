@@ -6,6 +6,7 @@ import router from "./router/router"
 import axios from 'axios'
 import VueSocketIO from 'vue-socket.io'
 import SocketIO from "socket.io-client"
+import VueChatScroll from 'vue-chat-scroll'
 
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios
@@ -19,6 +20,7 @@ Vue.use(new VueSocketIO({
   debug: true,
   connection: SocketIO(process.env.VUE_APP_API_URL),
 }));
+Vue.use(VueChatScroll)
 
 
 new Vue({

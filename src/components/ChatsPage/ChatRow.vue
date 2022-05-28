@@ -5,7 +5,7 @@
       size="3.5rem"
       :src="user.profileImage"
     />
-    <div>
+    <div class="w-50">
       <h4 class="mb-0">
         {{ user.username }}
       </h4>
@@ -32,8 +32,10 @@ export default {
     data() {
         return {
             user: this.chat.user,
-            //lastMessage: this.chat.lastMessage
-            lastMessage: {}
+            lastMessage: {
+                content: this.chat.lastMessage.content,
+                sentByLoggedInUser: this.chat.lastMessage.sentBy == JSON.parse(localStorage.loggedInUser)._id
+            },
         }
     }
 }
@@ -51,5 +53,8 @@ export default {
 }
 .message {
     color: var(--gray);
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 </style>

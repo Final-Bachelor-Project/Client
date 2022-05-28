@@ -11681,6 +11681,11 @@
   "resolved" "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
   "version" "1.1.2"
 
+"vue-chat-scroll@^1.4.0":
+  "integrity" "sha512-taHcwJJadZwJR4C4t/fv+R9ZXXSrwrpQKP17La/ep5q7IyH5i3BvscgSpXwu7s8TPP9T9n5n3JDnO+vRsZ/mBQ=="
+  "resolved" "https://registry.npmjs.org/vue-chat-scroll/-/vue-chat-scroll-1.4.0.tgz"
+  "version" "1.4.0"
+
 "vue-cookies@^1.8.1":
   "integrity" "sha512-PDq1EaiRRyau5PBQVscXboHW+iWtcG4wRY2UKIz1j0nrjb3KESRU1PUyNUDdOajAwy4RH1IfiNR0suhWRXQdrA=="
   "resolved" "https://registry.npmjs.org/vue-cookies/-/vue-cookies-1.8.1.tgz"
@@ -11779,7 +11784,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.5.18", "vue@^2.6.14", "vue@^2.x", "vue@2.x":
+"vue@^2 || ^3.0.0-0", "vue@^2.4.4", "vue@^2.5.18", "vue@^2.6.14", "vue@^2.x", "vue@2.x":
   "integrity" "sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"

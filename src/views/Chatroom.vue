@@ -1,8 +1,21 @@
 <template>
   <div>
-    <div />
+    <div class="chatroom-header">
+      <b-icon
+        class="mr-4"
+        icon="arrow-left"
+        font-scale="2"
+        @click="goToChats()"
+      />
+      <b-avatar :src="chat.user.profileImage" />
+      <h4 class="mb-0 pl-2">
+        {{ chat.user.username }}
+      </h4>
+    </div>
     <div
-      v-if="messages.length > 0"
+      v-show="messages.length > 0"
+      id="messages"
+      v-chat-scroll
       class="messages-container"
     >
       <Message
@@ -33,6 +46,7 @@
 </template>
 <script>
 import Message from "../components/ChatroomPage/Message.vue"
+
 export default {
     components: {
         Message
@@ -57,6 +71,13 @@ export default {
         })
         const messages = await this.$axios.get(`/api/messages/chat/${this.$route.params.id}`)
         this.messages = messages.data
+
+        this.$nextTick(() => {
+            const container = this.$el.querySelector("#messages");
+            container.scrollTop = container.scrollHeight;
+            console.log(container.scrollTop);
+            console.log(container.scrollHeight);
+        })
     },
     methods: {
         sendMessage: function() {
@@ -66,6 +87,9 @@ export default {
                 sentBy: JSON.parse(localStorage.loggedInUser)._id
             });
             this.messageText = ""
+        },
+        goToChats: function() {
+            this.$router.push({path: '/chats'})
         }
     }
 }
@@ -98,5 +122,23 @@ export default {
     position: absolute;
     left: 0;
     width: -webkit-fill-available;
+    overflow-y: scroll;
+    margin-top: 4rem;
+}
+
+.chatroom-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    margin-top: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    z-index: 1;
+
 }
 </style>
