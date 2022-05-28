@@ -8,19 +8,22 @@
       <Message
         v-for="message in messages"
         :key="message.id"
+        class="mt-2"
         :message="message"
       />
     </div>
     <div class="chat-input-container">
       <b-form-textarea
         v-model="messageText"
+        class="w-100"
         :class="{short: messageText.length < 30 && !messageText.includes('\n')}"
         max-rows="4"
       />
       <b-button
+        v-if="messageText"
         variant="primary"
         pill
-        class="px-2 py-1"
+        class="px-2 py-1 ml-3"
         @click="sendMessage"
       >
         <i class="bi bi-send" />
@@ -43,8 +46,7 @@ export default {
     },
     sockets:{
         messageReceived(data) {
-            console.log(data);
-            //messages.push()
+            this.messages.push(data)
         }
     },
     created: async function() {
@@ -61,8 +63,9 @@ export default {
             this.$socket.emit('newMessage', {
                 chatId: this.chat.id,
                 content: this.messageText,
-                sentBy: localStorage.loggedInUser._id
-            })
+                sentBy: JSON.parse(localStorage.loggedInUser)._id
+            });
+            this.messageText = ""
         }
     }
 }
