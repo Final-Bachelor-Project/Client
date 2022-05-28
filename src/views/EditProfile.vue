@@ -12,7 +12,7 @@
       </h5>
     </div>
     <b-form
-      class="edit-profile-form"
+      class="profile-form"
       @submit="editProfile"
     >
       <div class="flex-container">
@@ -48,7 +48,7 @@
           />
           <b-form-input
             id="country"
-            v-model="user.city"
+            v-model="user.country"
             required
             placeholder="Country"
           />
