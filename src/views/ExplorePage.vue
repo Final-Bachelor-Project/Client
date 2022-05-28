@@ -30,9 +30,8 @@ export default {
     },
     created: async function () {
         const currentUser = (await this.$axios.get('/api/users/current', {withCredentials: true})).data.user
-        console.log(currentUser.id);
-        const loggedInUser = (await this.$axios.get('/api/users/find', {withCredentials: true})).data.user
-        localStorage.loggedInUser = loggedInUser
+        const loggedInUser = (await this.$axios.get(`/api/users/spotify/${currentUser.id}`, {withCredentials: true})).data.user
+        localStorage.loggedInUser = JSON.stringify(loggedInUser)
         await this.getUsers()
     },
     methods: {

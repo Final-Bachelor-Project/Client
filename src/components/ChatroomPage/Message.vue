@@ -18,7 +18,7 @@ export default {
     },
     computed: {
         sentByLoggedInUser() {
-            return this.message.sentBy == localStorage.loggedInUser._id
+            return this.message.sentBy == JSON.parse(localStorage.loggedInUser)._id
         }
     }
 }
