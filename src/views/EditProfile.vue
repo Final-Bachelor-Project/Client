@@ -70,7 +70,7 @@
             Edit
           </b-button>
         </div>
-      </b-form-group>>
+      </b-form-group>
     </b-form>
   </div>
 </template>
@@ -119,6 +119,10 @@ header {
 }
 
 .profile-form {
+    margin: 1.5rem;
+}
+
+.profile-form input {
     margin-bottom: 1rem;
 }
 
