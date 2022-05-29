@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <div
-      v-if="requests.length"
+      v-if="requests.length > 0"
       class="requests-container"
     >
       <Request
@@ -14,7 +14,7 @@
     </div>
     <div
       v-else
-      class="text-center mt-4"
+      class="text-center requests-container"
     >
       <h4>
         You have no pending requests
@@ -40,7 +40,6 @@ export default {
             try{
                 const requests = await this.$axios.get('api/requests');
                 this.requests = requests.data
-                console.log(this.requests);
             } catch(error) {
                 if(error.response.status === 404) {
                     this.requests = []
@@ -70,5 +69,6 @@ export default {
 <style scoped>
 .requests-container {
     margin: 0.8rem;
+    margin-top: 5.5rem;
 }
 </style>

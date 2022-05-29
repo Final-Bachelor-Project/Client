@@ -29,6 +29,9 @@ export default {
         }
     },
     created: async function () {
+        const currentUser = (await this.$axios.get('/api/users/current', {withCredentials: true})).data.user
+        const loggedInUser = (await this.$axios.get(`/api/users/spotify/${currentUser.id}`, {withCredentials: true})).data.user
+        localStorage.loggedInUser = JSON.stringify(loggedInUser)
         await this.getUsers()
     },
     methods: {
@@ -58,7 +61,13 @@ export default {
     flex-wrap: wrap;
     gap: 1rem;
     margin: 0.8rem;
-    /* margin-top: 5.5rem; */
+    justify-content: center;
+}
+
+.users-container div {
+    flex-shrink: 0;
+    flex-basis: 25%;
+    flex-grow: 1;
 }
 
 .matches-header {
@@ -69,6 +78,19 @@ export default {
 
 .matches-header h4 {
     color: var(--primary);
+}
+
+@media only screen and (min-width: 768px) {
+    .users-container {
+        margin-right: 5rem;
+        margin-left: 5rem;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .users-container {
+        margin-right: 10rem;
+        margin-left: 10rem;
+    }
 }
 
 </style>

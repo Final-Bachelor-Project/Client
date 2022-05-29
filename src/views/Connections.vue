@@ -1,12 +1,21 @@
 <template>
   <div>
     <Navbar />
-    <div class="connections-container">
+    <div
+      v-if="connections.length > 0"
+      class="connections-container"
+    >
       <Connection
         v-for="connection in connections"
         :key="connection.id"
         :connection="connection"
       />
+    </div>
+    <div
+      v-else
+      class="text-center connections-container"
+    >
+      <h4>You have no connections</h4>
     </div>
   </div>
 </template>
@@ -31,7 +40,6 @@ export default {
             try{
                 const connections = await this.$axios.get('api/users/current/connections');
                 this.connections = connections.data
-                console.log(this.connections);
             } catch(error) {
                 if(error.response.status === 404) {
                     this.connections = []
@@ -43,6 +51,7 @@ export default {
 </script>
 <style scoped>
 .connections-container {
-    margin: 0.8rem
+    margin: 0.8rem;
+    margin-top: 5.5rem;
 }
 </style>

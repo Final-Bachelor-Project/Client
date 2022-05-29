@@ -1,34 +1,22 @@
 <template>
-  <div class="complete-profile-wrapper">
-    <header><h3>Complete your profile</h3></header>
+  <div class="edit-profile-wrapper">
+    <Navbar />
     <div class="profile-img-container">
       <b-avatar
-        badge
-        badge-variant="primary"
         variant="secondary"
         :src="user.profileImage"
         size="7rem"
-      >
-        <template #badge>
-          <a>
-            <b-icon
-              scale="0.6"
-              icon="pen-fill"
-              @click="editImage"
-            />
-          </a>
-        </template>
-      </b-avatar>
+      />
       <h5 class="pt-2">
         {{ user.username }}
       </h5>
     </div>
     <b-form
       class="profile-form"
-      @submit="completeProfile"
+      @submit="editProfile"
     >
       <div class="flex-container">
-        <b-form-input
+        <b-form-input 
           id="first-name"
           v-model="user.firstName"
           required
@@ -74,12 +62,12 @@
         />
         <div class="text-center mt-4">
           <b-button
-            id="complete-btn"
+            id="edit-profile-btn"
             class="large-btn-mobile"
             type="submit"
             variant="primary"
-          >
-            Complete
+          > 
+            Edit
           </b-button>
         </div>
       </b-form-group>
@@ -87,56 +75,46 @@
   </div>
 </template>
 <script>
+import Navbar from "../components/Navbar.vue"
 export default {
+    components: {
+      Navbar
+    },
     data() {
         return {
             user: {},
         }
     },
-    created: async function () {
-        const currentUser = (await this.$axios.get('/api/users/current', {withCredentials: true})).data.user
-        this.user = {
-            spotifyUserId: currentUser.id,
-            username: currentUser.display_name,
-            firstName: "",
-            lastName: "",
-            profileImage: currentUser.images ? currentUser.images[0].url : "",
-            dateOfBirth: "",
-            country: currentUser.country ? currentUser.country : "",
-            city: "",
-            bio: ""
-        }
-        localStorage.spotifyUserId = this.user.spotifyUserId
+    created: async function() {
+        this.user = JSON.parse(localStorage.loggedInUser)
     },
     methods: {
-        completeProfile: async function (e) {
+        editProfile: async function (e) {
             e.preventDefault()
-            await this.$axios.post("/api/users", {...this.user})
-            this.$router.push({path: '/explore'});
+            const updatedUser = await this.$axios.put("/api/users", {...this.user})
+            console.log(updatedUser.data);
+            localStorage.loggedInUser = JSON.stringify(updatedUser.data)
+            this.$router.push({path: '/profile'})
             this.makeToast()
         },
         makeToast() {
             this.$root.$bvToast.toast('', {
-                title: 'Profile completed!',
+                title: "Profile updated",
                 variant: 'success',
                 toaster: 'b-toaster-top-center',
                 solid: true
             })
-        },
-        editImage: function() {
-            console.log('clicked');
         }
     }
 }
 </script>
 <style scoped>
-
 header {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 2rem
 }
 
-.complete-profile-wrapper {
+.edit-profile-wrapper {
     display: grid;
     height: 100vh;
     grid-template-rows: 1fr 2fr 5fr;
@@ -144,40 +122,19 @@ header {
 
 .profile-img-container {
     text-align: center;
-}
-
-.profile-img-container::v-deep .b-avatar-badge{
-    min-height: 1rem;
-    min-width: 1rem;
-    padding: 0.2rem;
-}
-
-.profile-img-container::v-deep .b-avatar-badge:hover{
-    cursor: pointer;
-    transform: scale(1.2);
+    margin-top: 5rem;
 }
 
 .profile-form {
     margin: 1.5rem;
-    /* position: relative; */
-    /* text-align: center; */
 }
 
 .profile-form input {
     margin-bottom: 1rem;
 }
 
-/* .profile-form button {
-    position: absolute; 
-    bottom: 0.7rem;
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-} */
-
 @media only screen and (min-width: 768px) {
-    .flex-container{
+    .flex-container {
         display: flex;
         flex-direction: row;
     }
@@ -192,7 +149,7 @@ header {
 
     .profile-form {
         margin-right: 3rem;
-        margin-left: 3rem;
+        margin-left: 3rem
     }
 }
 
@@ -202,11 +159,11 @@ header {
         margin-left: 8rem;
     }
 }
+
 @media only screen and (min-width: 1200px) {
     .profile-form {
         margin-right: 15rem;
         margin-left: 15rem;
     }
 }
-
 </style>

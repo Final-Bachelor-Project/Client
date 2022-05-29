@@ -5,6 +5,8 @@
     --white: #FFFFFF;
     --black-default: #2c3e50;
     --primary: #5E72EB;
+    --gray: gray;
+    --light-gray: #E8E8E8
 }
 
 .btn-spotify-green {
@@ -21,4 +23,36 @@
     border-radius: 0.6rem !important;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%),
         0 1px 5px 0 rgb(0 0 0 / 15%);
+}
+
+.modal--full-screen {
+    max-width: 100%;
+    margin: 0 !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+    display: flex;
+}
+
+.modal--no-border {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.modal-body--no-padding {
+    padding: 0 !important;
+}
+
+.modal-header--no-border {
+    border-bottom: none !important;
+    position: absolute;
+    z-index: 1;
+}
+
+@media only screen and (min-width: 575px) {
+    .modal--full-screen {
+        margin: 1.75rem auto !important;
+    }
 }
