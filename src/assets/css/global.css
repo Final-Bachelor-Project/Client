@@ -4,7 +4,9 @@
     --spotify-green: #1DB954;
     --white: #FFFFFF;
     --black-default: #2c3e50;
-    --primary: #5e72eb;
+    --primary: #5E72EB;
+    --gray: gray;
+    --light-gray: #E8E8E8
 }
 
 .btn-spotify-green {

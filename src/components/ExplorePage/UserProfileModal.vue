@@ -25,6 +25,7 @@
             </p>
           </div>
           <b-button
+            v-if="!isConnection"
             pill
             size="sm"
             variant="primary"
@@ -96,11 +97,21 @@
 </template>
 <script>
 export default {
-    props: [
-        'showModal',
-        'userId',
-        'score'
-    ],
+    props: {
+        showModal: {
+          type: Boolean
+        },
+        userId: {
+          type: String
+        },
+        score: {
+          type: Number
+        },
+        isConnection: {
+          default: false,
+          type: Boolean
+        }
+    },
     data() {
         return {
             showProfileModal: this.showModal,
@@ -134,7 +145,7 @@ export default {
         }
     },
     created: async function() {
-        this.user = (await this.$axios.get(`api/users/${this.userId}`)).data;
+        this.user = (await this.$axios.get(`/api/users/${this.userId}`)).data;
         this.tracks = await this.getCommonTracks()
         this.artists = await this.getCommonArtists()
     },
@@ -153,10 +164,10 @@ export default {
             }
         },
         getCommonTracks: async function() {
-          return (await this.$axios.get(`api/users/tracks/common/${this.user._id}`)).data
+          return (await this.$axios.get(`/api/users/tracks/common/${this.user._id}`)).data
         },
         getCommonArtists: async function() {
-          return (await this.$axios.get(`api/users/artists/common/${this.user._id}`)).data
+          return (await this.$axios.get(`/api/users/artists/common/${this.user._id}`)).data
         },
         showTracks: function() {
           this.areTracksShown = true

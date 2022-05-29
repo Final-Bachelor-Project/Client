@@ -1,27 +1,60 @@
 <template>
-  <b-card
-    class="mb-3"
-    body-class="connection-container"
-  >
-    <b-avatar
-      :src="connection.profileImage"
-      size="4rem"
+  <div>
+    <b-card
+      class="mb-3"
+      body-class="connection-container"
+      @click="openProfile"
+    >
+      <b-avatar
+        :src="connection.profileImage"
+        size="4rem"
+      />
+      <h5 class="mb-0 username">
+        {{ connection.username }}
+      </h5>
+      <b-icon
+        variant="info"
+        class="mr-2 ml-auto"
+        font-scale="2.5"
+        icon="chat-dots"
+        @click="goToChatroom"
+      />
+    </b-card>
+    <UserProfileModal
+      v-if="showProfileModal"
+      :is-connection="true"
+      :show-modal="showProfileModal"
+      :user-id="connection._id"
+      :score="connection.score"
+      v-on="$listeners"
+      @closeModal="closeModal"
     />
-     
-    <h5 class="mb-0 username">
-      {{ connection.username }}
-    </h5>
-    <b-icon
-      variant="info"
-      class="mr-2 ml-auto"
-      font-scale="2.5"
-      icon="chat-dots"
-    />
-  </b-card>
+  </div>
 </template>
 <script>
+import UserProfileModal from "../ExplorePage/UserProfileModal.vue"
 export default {
-    props: ['connection']
+    components: {
+      UserProfileModal
+    },
+    props: ['connection'],
+    data() {
+      return {
+        showProfileModal: false
+      }
+    },
+    methods: {
+      goToChatroom: async function() {
+        const chat = await this.$axios.get(`api/chats/users/${this.connection._id}`)
+        this.$router.push({path: `/chatroom/${chat.data._id}`})
+      },
+      openProfile: function() {
+        this.showProfileModal = true
+      },
+      closeModal: function() {
+        this.showProfileModal = false
+      }
+    }
 }
 </script>
 <style scoped>

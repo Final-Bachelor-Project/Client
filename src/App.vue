@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
@@ -8,6 +8,11 @@
 
 export default {
   name: 'App',
+  sockets: {
+    connect: function () {
+      console.log('socket connected')
+    }
+  },
 }
 </script>
 
