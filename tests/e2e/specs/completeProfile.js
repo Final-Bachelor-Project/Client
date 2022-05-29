@@ -13,7 +13,7 @@ describe('Complete profile flow', () => {
         cy.intercept({
             method: 'GET',
             url: 'api/auth/session',
-        }, null).as('session')
+        }, {}).as('session')
 
         cy.intercept("POST", "api/users", {
             statusCode: 200
