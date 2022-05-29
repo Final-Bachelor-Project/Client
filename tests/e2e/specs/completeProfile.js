@@ -13,7 +13,18 @@ describe('Complete profile flow', () => {
         cy.intercept({
             method: 'GET',
             url: 'api/auth/session',
-        }, {}).as('session')
+        }, {}).as('session1')
+
+        cy.intercept({
+            method: 'GET',
+            url: 'api/auth/session',
+        }, {
+            data: {
+                id: "id",
+                display_name: "username"
+            }
+        }).as('session2')
+
 
         cy.intercept("POST", "api/users", {
             statusCode: 200
@@ -21,7 +32,7 @@ describe('Complete profile flow', () => {
     })
     it('Visits the app root url', () => {
         cy.visit('/complete')
-        cy.wait(['@session'])
+        cy.wait(['@session1'])
         cy.wait(['@currentUser'])
         cy.get('input[id="first-name"]').type('First name')
         cy.get('input[id="last-name"]').type('Last name')
@@ -31,7 +42,7 @@ describe('Complete profile flow', () => {
         cy.get('textarea[id="bio"]').type('Bio')
         cy.get('#complete-btn').click()
         cy.wait(['@createUser'])
-        cy.wait(['@session'])
+        cy.wait(['@session2'])
         cy.contains('Your suggestions')
     })
 })
