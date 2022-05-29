@@ -9,11 +9,17 @@
       <h4 class="mb-0">
         {{ user.username }}
       </h4>
-      <p class="mb-0 message">
+      <p
+        v-if="chat.lastMessage"
+        class="mb-0 message"
+      >
         <span v-if="lastMessage.sentByLoggedInUser">You: </span>{{ lastMessage.content }}
       </p>
     </div>
-    <div class="ml-auto">
+    <div
+      v-if="chat.lastMessage"
+      class="ml-auto"
+    >
       <p class="chat-date">
         {{ lastMessage.dateTime }}
       </p>
@@ -34,15 +40,19 @@ export default {
         return {
             user: this.chat.user,
             lastMessage: {
-                content: this.chat.lastMessage.content,
-                sentByLoggedInUser: this.chat.lastMessage.sentBy == JSON.parse(localStorage.loggedInUser)._id,
-                dateTime: this.isDateToday(this.chat.lastMessage.dateTime) ? moment(this.chat.lastMessage.dateTime).format("hh:mm") : moment(this.chat.lastMessage.dateTime).format('MMM Do YY')
+                content: this.chat.lastMessage ? this.chat.lastMessage.content : '',
+                sentByLoggedInUser: this.chat.lastMessage ? this.chat.lastMessage.sentBy == JSON.parse(localStorage.loggedInUser)._id : '',
+                dateTime: this.formatDateTime()
             },
         }
     },
     methods: {
         isDateToday(datetime) {
             return moment().isSame(moment(datetime), 'day');
+        },
+        formatDateTime() {
+            if(!this.chat.lastMessage) return ''
+            return this.isDateToday(this.chat.lastMessage.dateTime) ? moment(this.chat.lastMessage.dateTime).format("hh:mm") : moment(this.chat.lastMessage.dateTime).format('MMM Do YY')
         }
     }
 }
