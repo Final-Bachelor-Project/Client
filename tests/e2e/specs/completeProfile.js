@@ -13,12 +13,7 @@ describe('Complete profile flow', () => {
         cy.intercept({
             method: 'GET',
             url: 'api/auth/session',
-        },
-            {
-                id: "id",
-                display_name: "username"
-            }
-        ).as('session')
+        }, null).as('session')
 
         cy.intercept("POST", "api/users", {
             statusCode: 200
@@ -26,6 +21,7 @@ describe('Complete profile flow', () => {
     })
     it('Visits the app root url', () => {
         cy.visit('/complete')
+        cy.wait(['@session'])
         cy.wait(['@currentUser'])
         cy.get('input[id="first-name"]').type('First name')
         cy.get('input[id="last-name"]').type('Last name')
