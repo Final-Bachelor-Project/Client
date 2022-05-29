@@ -10,6 +10,16 @@ describe('Complete profile flow', () => {
             }
         ).as('currentUser')
 
+        cy.intercept({
+            method: 'GET',
+            url: 'api/auth/session',
+        },
+            {
+                id: "id",
+                display_name: "username"
+            }
+        ).as('session')
+
         cy.intercept("POST", "api/users", {
             statusCode: 200
         }).as('createUser')
@@ -25,6 +35,7 @@ describe('Complete profile flow', () => {
         cy.get('textarea[id="bio"]').type('Bio')
         cy.get('#complete-btn').click()
         cy.wait(['@createUser'])
+        cy.wait(['@session'])
         cy.contains('Your suggestions')
     })
 })
