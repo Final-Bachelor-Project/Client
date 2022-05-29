@@ -1,66 +1,97 @@
 <template>
-  <div>
-    <div class="chatroom-header">
-      <b-icon
-        class="mr-4"
-        icon="arrow-left"
-        font-scale="2"
-        @click="goToChats()"
-      />
-      <b-avatar :src="chat.user.profileImage" />
-      <h4 class="mb-0 pl-2">
-        {{ chat.user.username }}
-      </h4>
-    </div>
-    <div
-      v-show="messages.length > 0"
-      id="messages"
-      v-chat-scroll
-      class="messages-container"
-    >
-      <Message
-        v-for="message in messages"
-        :key="message.id"
-        class="mt-2"
-        :message="message"
-      />
-    </div>
-    <div class="chat-input-container">
-      <b-form-textarea
-        v-model="messageText"
-        class="w-100"
-        :class="{short: messageText.length < 30 && !messageText.includes('\n')}"
-        max-rows="4"
-      />
-      <b-button
-        v-if="messageText"
-        variant="primary"
-        pill
-        class="px-2 py-1 ml-3"
-        @click="sendMessage"
+  <div class="grid-container">
+    <Chats
+      v-if="isBigScreen"
+      class="chats"
+    />
+    <div :class="isBigScreen ? 'position-relative' : ''">
+      <div
+        v-if="chat.user"
+        class="chatroom-header"
+        @click="openProfile"
       >
-        <i class="bi bi-send" />
-      </b-button>
+        <b-icon
+          v-if="!isBigScreen"
+          class="mr-4"
+          icon="arrow-left"
+          font-scale="2"
+          @click="goToChats()"
+        />
+        <b-avatar :src="chat.user.profileImage" />
+        <h4 class="mb-0 pl-2">
+          {{ chat.user.username }}
+        </h4>
+      </div>
+      <div
+        v-show="messages.length > 0"
+        v-chat-scroll
+        class="messages-container"
+      >
+        <Message
+          v-for="message in messages"
+          :key="message.id"
+          :class="isBigScreen ? 'message--width' : ''"
+          class="mt-2"
+          :message="message"
+        />
+      </div>
+      <div class="chat-input-container">
+        <b-form-textarea
+          v-model="messageText"
+          class="w-100"
+          :class="{short: messageText.length < 30 && !messageText.includes('\n')}"
+          max-rows="4"
+        />
+        <b-button
+          v-if="messageText"
+          variant="primary"
+          pill
+          class="px-2 py-1 ml-3"
+          @click="sendMessage"
+        >
+          <i class="bi bi-send" />
+        </b-button>
+      </div>
     </div>
+    <UserProfileModal
+      v-if="showProfileModal"
+      :is-connection="true"
+      :show-modal="showProfileModal"
+      :user-id="chat.user._id"
+      :score="chat.user.score"
+      v-on="$listeners"
+      @closeModal="closeModal"
+    />
   </div>
 </template>
 <script>
 import Message from "../components/ChatroomPage/Message.vue"
+import UserProfileModal from "../components/ExplorePage/UserProfileModal.vue"
+import Chats from "../views/Chats.vue"
 
 export default {
     components: {
-        Message
+        Message,
+        UserProfileModal,
+        Chats
     },
     data() {
         return {
             messageText: "",
             messages: [],
             chat: {},
+            showProfileModal: false,
+            windowWidth: window.innerWidth
         }
     },
     sockets:{
         messageReceived(data) {
             this.messages.push(data)
+        }
+    },
+    computed: {
+        isBigScreen() {
+            return this.windowWidth > 850
         }
     },
     created: async function() {
@@ -71,13 +102,11 @@ export default {
         })
         const messages = await this.$axios.get(`/api/messages/chat/${this.$route.params.id}`)
         this.messages = messages.data
-
-        this.$nextTick(() => {
-            const container = this.$el.querySelector("#messages");
-            container.scrollTop = container.scrollHeight;
-            console.log(container.scrollTop);
-            console.log(container.scrollHeight);
-        })
+    },
+    mounted() {
+        window.onresize = () => {
+            this.windowWidth = window.innerWidth
+        }
     },
     methods: {
         sendMessage: function() {
@@ -90,13 +119,19 @@ export default {
         },
         goToChats: function() {
             this.$router.push({path: '/chats'})
+        },
+        openProfile: function() {
+            this.showProfileModal = true
+        },
+        closeModal: function() {
+            this.showProfileModal = false
         }
     }
 }
 </script>
 <style scoped>
 .chat-input-container {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     display: flex;
@@ -123,7 +158,7 @@ export default {
     left: 0;
     width: -webkit-fill-available;
     overflow-y: scroll;
-    margin-top: 4rem;
+    top: 5rem;
 }
 
 .chatroom-header {
@@ -139,6 +174,21 @@ export default {
     padding-top: 1rem;
     padding-bottom: 1rem;
     z-index: 1;
+}
+.chats {
+    border-right: 1px solid var(--light-gray);
+}
 
+.chats::v-deep .chats-container{
+    height: 85vh;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.message--width {
+    max-width: 25rem;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-top nav--background">
+  <div class="nav--fixed-top nav--background">
     <b-navbar>
       <b-navbar-brand>
         <Sidebar />
@@ -33,5 +33,12 @@ export default {
 
 .navbar {
   padding: 0;
+}
+
+.nav--fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1030;
 }
 </style>

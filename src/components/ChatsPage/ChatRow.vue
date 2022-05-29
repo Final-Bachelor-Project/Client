@@ -15,13 +15,14 @@
     </div>
     <div class="ml-auto">
       <p class="chat-date">
-        {{ lastMessage.date }}
+        {{ lastMessage.dateTime }}
       </p>
       <p />
     </div>
   </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
     setup() {
         
@@ -34,8 +35,14 @@ export default {
             user: this.chat.user,
             lastMessage: {
                 content: this.chat.lastMessage.content,
-                sentByLoggedInUser: this.chat.lastMessage.sentBy == JSON.parse(localStorage.loggedInUser)._id
+                sentByLoggedInUser: this.chat.lastMessage.sentBy == JSON.parse(localStorage.loggedInUser)._id,
+                dateTime: this.isDateToday(this.chat.lastMessage.dateTime) ? moment(this.chat.lastMessage.dateTime).format("hh:mm") : moment(this.chat.lastMessage.dateTime).format('MMM Do YY')
             },
+        }
+    },
+    methods: {
+        isDateToday(datetime) {
+            return moment().isSame(moment(datetime), 'day');
         }
     }
 }

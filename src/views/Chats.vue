@@ -36,7 +36,7 @@ export default {
             this.$router.push({path: `/chatroom/${id}`})
         },
         getChats: async function() {
-            return (await this.$axios.get(`api/chats`)).data
+            return (await this.$axios.get(`/api/chats`)).data
         }
     }
 }
