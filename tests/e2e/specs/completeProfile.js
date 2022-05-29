@@ -32,7 +32,6 @@ describe('Complete profile flow', () => {
     })
     it('Visits the app root url', () => {
         cy.visit('/complete')
-        cy.wait(['@session1'])
         cy.wait(['@currentUser'])
         cy.get('input[id="first-name"]').type('First name')
         cy.get('input[id="last-name"]').type('Last name')
