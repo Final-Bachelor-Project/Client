@@ -22,7 +22,6 @@
     </b-card>
     <UserProfileModal
       v-if="showProfileModal"
-      :is-connection="true"
       :show-modal="showProfileModal"
       :user-id="connection._id"
       :score="connection.score"

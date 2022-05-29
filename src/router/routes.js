@@ -6,6 +6,7 @@ const Connections = () => import("../views/Connections.vue")
 const Chats = () => import("../views/Chats.vue")
 const Chatroom = () => import("../views/Chatroom.vue")
 const EditProfile = () => import("../views/EditProfile.vue");
+const ProfilePage = () => import("../views/ProfilePage.vue");
 
 const routes = [
     {
@@ -22,6 +23,11 @@ const routes = [
         path: "/",
         name: "Explore",
         component: ExplorePage
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: ProfilePage
     },
     {
         path: "/requests",
@@ -44,7 +50,7 @@ const routes = [
         component: Chatroom
     },
     {
-        path: "/edit",
+        path: "/edit-profile",
         name: "Edit profile",
         component: EditProfile
     }

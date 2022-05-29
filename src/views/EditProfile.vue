@@ -1,6 +1,6 @@
 <template>
   <div class="edit-profile-wrapper">
-    <header><h3>Edit your profile</h3></header>
+    <Navbar />
     <div class="profile-img-container">
       <b-avatar
         variant="secondary"
@@ -75,7 +75,11 @@
   </div>
 </template>
 <script>
+import Navbar from "../components/Navbar.vue"
 export default {
+    components: {
+      Navbar
+    },
     data() {
         return {
             user: {},
@@ -87,8 +91,10 @@ export default {
     methods: {
         editProfile: async function (e) {
             e.preventDefault()
-            await this.$axios.put("/api/users", {...this.user})
-            this.$router.push({path: '/profile'}) //TODO
+            const updatedUser = await this.$axios.put("/api/users", {...this.user})
+            console.log(updatedUser.data);
+            localStorage.loggedInUser = JSON.stringify(updatedUser.data)
+            this.$router.push({path: '/profile'})
             this.makeToast()
         },
         makeToast() {
@@ -116,6 +122,7 @@ header {
 
 .profile-img-container {
     text-align: center;
+    margin-top: 5rem;
 }
 
 .profile-form {

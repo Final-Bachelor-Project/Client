@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <div
-      v-if="requests.length"
+      v-if="requests.length > 0"
       class="requests-container"
     >
       <Request
@@ -14,7 +14,7 @@
     </div>
     <div
       v-else
-      class="text-center mt-4"
+      class="text-center requests-container"
     >
       <h4>
         You have no pending requests

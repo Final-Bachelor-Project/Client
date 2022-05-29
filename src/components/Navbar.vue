@@ -1,5 +1,8 @@
 <template>
-  <div class="nav--fixed-top nav--background">
+  <div
+    class="nav--fixed-top nav--background"
+    :class="isWholeScreen ? 'whole-screen': ''"
+  >
     <b-navbar>
       <b-navbar-brand>
         <Sidebar />
@@ -19,6 +22,12 @@ export default {
     components: {
         Sidebar
     }, 
+    props: {
+      isWholeScreen: {
+        default: true,
+        type: Boolean
+      }
+    },
     computed: {
         currentRouteName() {
             return this.$route.name;
@@ -40,5 +49,8 @@ export default {
     top: 0;
     left: 0;
     z-index: 1030;
+}
+.whole-screen {
+  right: 0;
 }
 </style>

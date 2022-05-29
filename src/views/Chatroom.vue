@@ -2,6 +2,7 @@
   <div class="grid-container">
     <Chats
       v-if="isBigScreen"
+      :is-whole-screen="false"
       class="chats"
     />
     <div :class="isBigScreen ? 'position-relative' : ''">

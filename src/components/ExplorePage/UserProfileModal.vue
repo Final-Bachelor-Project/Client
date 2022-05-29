@@ -25,13 +25,25 @@
             </p>
           </div>
           <b-button
-            v-if="!isConnection"
+            v-if="!isConnection && !hasPendingRequest"
             pill
             size="sm"
             variant="primary"
             @click="sendRequest"
           >
             <b-icon icon="person-plus" />
+          </b-button>
+          <p v-if="!isConnection && hasPendingRequest">
+            Request sent
+          </p>
+          <b-button
+            v-if="isConnection && !hasPendingRequest"
+            pill
+            size="sm"
+            variant="primary"
+            @click="removeConnection"
+          >
+            <b-icon icon="person-dash-fill" />
           </b-button>
         </div>
         <div class="bio my-4 text-center">
@@ -105,11 +117,7 @@ export default {
           type: String
         },
         score: {
-          type: Number
-        },
-        isConnection: {
-          default: false,
-          type: Boolean
+          type: String
         }
     },
     data() {
@@ -119,7 +127,9 @@ export default {
             tracks: [],
             artists: [],
             areTracksShown: true,
-            areArtistsShown: false
+            areArtistsShown: false,
+            isConnection: false,
+            hasPendingRequest: false
         }
     },
     computed: {
@@ -148,12 +158,17 @@ export default {
         this.user = (await this.$axios.get(`/api/users/${this.userId}`)).data;
         this.tracks = await this.getCommonTracks()
         this.artists = await this.getCommonArtists()
+
+        const loggedInUser = JSON.parse(localStorage.loggedInUser)
+        const loggedInUserConnections = (await this.$axios.get(`/api/users/${loggedInUser._id}`)).data.connections
+        this.isConnection = loggedInUserConnections.includes(this.user._id)
+        this.hasPendingRequest = (await this.$axios.get(`/api/requests/users/${this.user._id}`)).data
     },
     methods: {
         sendRequest: async function() {
             const request = await this.$axios({
                 method: 'POST',
-                url: 'api/requests',
+                url: '/api/requests',
                 data: {
                     receiverId: this.user._id
                 }
@@ -168,6 +183,11 @@ export default {
         },
         getCommonArtists: async function() {
           return (await this.$axios.get(`/api/users/artists/common/${this.user._id}`)).data
+        },
+        removeConnection: async function() {
+          await this.$axios.delete(`/api/users/current/connections/${this.user._id}`)
+          this.showProfileModal = false
+          this.$router.go()
         },
         showTracks: function() {
           this.areTracksShown = true

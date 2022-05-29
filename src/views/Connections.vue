@@ -1,12 +1,21 @@
 <template>
   <div>
     <Navbar />
-    <div class="connections-container">
+    <div
+      v-if="connections.length > 0"
+      class="connections-container"
+    >
       <Connection
         v-for="connection in connections"
         :key="connection.id"
         :connection="connection"
       />
+    </div>
+    <div
+      v-else
+      class="text-center connections-container"
+    >
+      <h4>You have no connections</h4>
     </div>
   </div>
 </template>
