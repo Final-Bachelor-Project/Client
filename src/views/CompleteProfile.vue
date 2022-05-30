@@ -112,7 +112,7 @@ export default {
         completeProfile: async function (e) {
             e.preventDefault()
             await this.$axios.post("/api/users", {...this.user})
-            this.$router.push({path: '/explore'});
+            this.$router.push({path: '/'});
             this.makeToast()
         },
         makeToast() {

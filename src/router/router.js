@@ -11,10 +11,10 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-    const loggedInUser = (await axios.get('/api/auth/session')).data
+    const loggedInUser = (await axios.get('api/auth/session')).data
     if ((to.name == 'Login' || to.name == 'Complete Profile') && loggedInUser) {
         next(`/`);
-    } else if (loggedInUser || to.name == 'Login') {
+    } else if (loggedInUser || to.name == 'Login' || to.name == 'Complete Profile') {
         next()
     } else {
         next({ name: "Login" });
