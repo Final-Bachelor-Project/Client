@@ -38,6 +38,8 @@ export default {
 <style scoped>
 .nav--background {
   background-color: var(--white);
+  /* background-color: whitesmoke;
+  border-bottom: 1px solid var(--light-gray); */
 }
 
 .navbar {
