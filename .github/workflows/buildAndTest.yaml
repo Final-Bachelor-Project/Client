@@ -23,6 +23,9 @@ jobs:
         run: npm run lint
       - name: Building the project
         run: npm run build
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
       - name: Run e2e tests
         uses: cypress-io/github-action@v2
         with:
