@@ -5,7 +5,7 @@
       img-alt="Image"
       img-top
       body-class="card-body-container"
-      img-height="70%"
+      img-height="190rem"
       @click="openProfile"
     >
       <b-badge

@@ -3,13 +3,11 @@
     <header><h3>Complete your profile</h3></header>
     <div class="profile-img-container">
       <b-avatar
-        badge
-        badge-variant="primary"
         variant="secondary"
         :src="user.profileImage"
         size="7rem"
       >
-        <template #badge>
+        <!-- <template #badge>
           <a>
             <b-icon
               scale="0.6"
@@ -17,7 +15,7 @@
               @click="editImage"
             />
           </a>
-        </template>
+        </template> -->
       </b-avatar>
       <h5 class="pt-2">
         {{ user.username }}
@@ -123,9 +121,9 @@ export default {
                 solid: true
             })
         },
-        editImage: function() {
-            console.log('clicked');
-        }
+        // editImage: function() {
+        //     console.log('clicked');
+        // }
     }
 }
 </script>

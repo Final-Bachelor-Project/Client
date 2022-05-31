@@ -30,7 +30,19 @@
       </div>
       <div class="profile-details">
         <h6>Bio: <span class="font-weight-light pl-2">{{ profile.bio }}</span></h6>
-        <div class="pb-3 lists-grid">
+        <h6>
+          Your top genres: 
+          <b-badge
+            v-for="genre in topGenres"
+            :key="genre"
+            pill
+            variant="primary"
+            class="ml-1"
+          >
+            {{ genre }}
+          </b-badge>
+        </h6>
+        <div class="lists-grid">
           <div class="mt-3">
             <h4>Top artists</h4>
             <b-list-group-item
@@ -83,13 +95,22 @@ export default {
             let genres = []
             const artists = this.profile.artists.slice(0, 10)
             for(const artist of artists) {
-                genres.push(artist.genres)
+                for(const genre of artist.genres) {
+                    genres.push(genre)
+                }
             }
-            const topGenres = genres.shift().filter(function(v) {
-                return genres.every(function(a) {
-                    console.log(a);
-                    return a.indexOf(v) !== -1;
-                });
+            const countedGenres = {}
+            for (const genre of genres) {
+                if (countedGenres[genre]) {
+                    countedGenres[genre] += 1;
+                } else {
+                    countedGenres[genre] = 1;
+                }
+            }
+
+            const sortedGenresByCount = Object.entries(countedGenres).sort(([,a],[,b]) => b-a)
+            const topGenres = sortedGenresByCount.slice(0, 3).map((genre) => {
+                return genre[0]
             })
             return topGenres
         }
@@ -129,18 +150,34 @@ export default {
         grid-template-columns: 1fr 1fr;
         column-gap: 2rem;
     }
+
+    .profile {
+        width: 25% !important;
+    }
+
+    .profile-details {
+        left: 25% !important;
+    }
+
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 600px) {
     .grid-container {
         display: grid;
-        grid-template-columns: 1fr 3fr;
     }
 
     .profile {
+        width: 40%;
         height: 90vh;
+        position: fixed;
     }
 
+    .profile-details {
+        overflow: scroll;
+        right: 0;
+        left: 40%;
+        position: absolute;
+    }
 }
 
 
