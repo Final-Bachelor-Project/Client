@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
 jobs:
   buildAndTest:
-    uses: ./.github/workflows/buildAndTest.yml
+    uses: ./.github/workflows/buildAndTest.yaml
 
   deployment:
     runs-on: self-hosted
     needs: buildAndTest
     steps:
-      - name: Restard server
+      - name: Restart server
         run: sudo service nginx reload
