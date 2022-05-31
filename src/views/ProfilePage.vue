@@ -93,7 +93,7 @@ export default {
         },
         topGenres() {
             let genres = []
-            const artists = this.profile.artists.slice(0, 10)
+            const artists = this.profile.artists
             for(const artist of artists) {
                 for(const genre of artist.genres) {
                     genres.push(genre)
