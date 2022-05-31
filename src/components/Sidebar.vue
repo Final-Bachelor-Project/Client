@@ -118,6 +118,7 @@ export default {
             return name == this.$route.name
         },
         logout: async function() {
+          localStorage.removeItem('loggedInUser')
           await this.$axios.post('/api/auth/logout')
           this.$router.push({path: '/login'})
         }

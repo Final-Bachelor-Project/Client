@@ -30,7 +30,7 @@
       </div>
       <div class="profile-details">
         <h6>Bio: <span class="font-weight-light pl-2">{{ profile.bio }}</span></h6>
-        <div class="lists-grid">
+        <div class="pb-3 lists-grid">
           <div class="mt-3">
             <h4>Top artists</h4>
             <b-list-group-item
