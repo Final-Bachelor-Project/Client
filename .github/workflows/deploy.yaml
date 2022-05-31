@@ -1,0 +1,16 @@
+name: deployment
+on:
+  push:
+    branches: [ master]
+  workflow_dispatch:
+  workflow_call:
+jobs:
+  buildAndTest:
+    uses: ./.github/workflows/buildAndTest.yml
+
+  deployment:
+    runs-on: self-hosted
+    needs: buildAndTest
+    steps:
+      - name: Restard server
+        run: sudo service nginx reload
