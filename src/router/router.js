@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from "./routes.js";
-import axios from 'axios'
 
 Vue.use(VueRouter);
 
@@ -10,11 +9,11 @@ const router = new VueRouter({
     mode: "history"
 });
 
-router.beforeEach(async (to, from, next) => {
-    const loggedInUser = (await axios.get('api/auth/session')).data
+router.beforeEach((to, from, next) => {
+    const loggedInUser = localStorage.loggedInUser
     if ((to.name == 'Login' || to.name == 'Complete Profile') && loggedInUser) {
         next(`/`);
-    } else if (loggedInUser || to.name == 'Login' || to.name == 'Complete Profile') {
+    } else if (loggedInUser || to.name == 'Login' || to.name == 'Complete Profile' || to.name == 'Explore') {
         next()
     } else {
         next({ name: "Login" });

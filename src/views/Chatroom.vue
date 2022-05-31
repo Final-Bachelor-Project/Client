@@ -9,7 +9,6 @@
       <div
         v-if="chat.user"
         class="chatroom-header"
-        @click="openProfile"
       >
         <b-icon
           v-if="!isBigScreen"
@@ -18,10 +17,12 @@
           font-scale="2"
           @click="goToChats()"
         />
-        <b-avatar :src="chat.user.profileImage" />
-        <h4 class="mb-0 pl-2">
-          {{ chat.user.username }}
-        </h4>
+        <div @click="openProfile">
+          <b-avatar :src="chat.user.profileImage" />
+          <h4 class="mb-0 pl-2">
+            {{ chat.user.username }}
+          </h4>
+        </div>
       </div>
       <div
         v-show="messages.length > 0"
@@ -42,6 +43,7 @@
           class="w-100"
           :class="{short: messageText.length < 30 && !messageText.includes('\n')}"
           max-rows="4"
+          @keyup.enter="sendMessage"
         />
         <b-button
           v-if="messageText"
@@ -176,8 +178,14 @@ export default {
     padding-bottom: 1rem;
     z-index: 1;
 }
+.chatroom-header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .chats {
     border-right: 1px solid var(--light-gray);
+
 }
 
 .chats::v-deep .chats-container{

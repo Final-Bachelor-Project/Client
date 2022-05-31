@@ -52,5 +52,6 @@ export default {
 }
 .whole-screen {
   right: 0;
+  border-bottom: 1px solid var(--light-gray);
 }
 </style>

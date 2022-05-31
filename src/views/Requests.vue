@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <div
-      v-if="requests.length > 0"
+      v-if="requests && requests.length > 0"
       class="requests-container"
     >
       <Request
@@ -38,7 +38,7 @@ export default {
     methods: {
         getRequests: async function() {
             try{
-                const requests = await this.$axios.get('api/requests');
+                const requests = await this.$axios.get('/api/requests');
                 this.requests = requests.data
             } catch(error) {
                 if(error.response.status === 404) {
@@ -50,7 +50,7 @@ export default {
             try {
                 const request = await this.$axios({
                     method: 'PUT',
-                    url: `api/requests/${data.id}`,
+                    url: `/api/requests/${data.id}`,
                     data: {
                         status: data.status
                     }
