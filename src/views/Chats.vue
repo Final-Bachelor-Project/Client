@@ -2,7 +2,7 @@
   <div>
     <Navbar :is-whole-screen="isWholeScreen" />
     <div
-      v-if="chats.length > 0"
+      v-if="chats && chats.length > 0"
       class="chats-container"
     >
       <div

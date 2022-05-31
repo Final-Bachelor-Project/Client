@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <div
-      v-if="connections.length > 0"
+      v-if="connections && connections.length > 0"
       class="connections-container"
     >
       <Connection
