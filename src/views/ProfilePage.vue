@@ -42,7 +42,7 @@
             {{ genre }}
           </b-badge>
         </h6>
-        <div class="lists-grid">
+        <div class="pb-4 lists-grid">
           <div class="mt-3">
             <h4>Top artists</h4>
             <b-list-group-item
