@@ -21,6 +21,7 @@
           <p>{{ profile.dateOfBirth }}</p>
         </b-row>
         <b-button
+          id="edit-profile-btn"
           class="mt-5"
           variant="primary"
           @click="goToEditProfile"
