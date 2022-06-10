@@ -92,7 +92,6 @@ export default {
         editProfile: async function (e) {
             e.preventDefault()
             const updatedUser = await this.$axios.put("/api/users", {...this.user})
-            console.log(updatedUser.data);
             localStorage.loggedInUser = JSON.stringify(updatedUser.data)
             this.$router.push({path: '/profile'})
             this.makeToast()

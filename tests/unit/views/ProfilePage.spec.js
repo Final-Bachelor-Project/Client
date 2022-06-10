@@ -1,7 +1,5 @@
-import { createLocalVue, mount, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import ProfilePage from '../../../src/views/ProfilePage.vue'
-
-const localVue = createLocalVue()
 
 describe('ProfilePage', () => {
 
