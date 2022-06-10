@@ -8,7 +8,8 @@
     <div class="users-container">
       <UserElement
         v-for="user in users"
-        :key="user.id"
+        :id="user._id"
+        :key="user._id"
         :user="user"
         @requestSent="requestSent"
       />
