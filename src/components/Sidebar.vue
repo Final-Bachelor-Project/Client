@@ -43,6 +43,7 @@
                 Explore
               </b-nav-item>
               <b-nav-item
+                id="profile-link"
                 to="/profile"
                 :active="isActive('Profile')"
                 @click="hide"
